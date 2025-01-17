@@ -1,0 +1,42 @@
+{
+  "name": "shopper/starter-kits",
+  "description": "Minimum scaffolding starter kit for Shopper e-commerce",
+  "keywords": ["laravel", "shopper", "e-commerce", "livewire", "inertiajs", "vue", "react"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Arthur Monney",
+      "email": "arthur@laravelshopper.dev"
+    }
+  ],
+  "require": {
+    "php": "^8.2",
+    "illuminate/console": "^11.0",
+    "illuminate/filesystem": "^11.0",
+    "illuminate/support": "^11.0",
+    "illuminate/validation": "^11.0",
+    "symfony/console": "^7.0"
+  },
+  "require-dev": {
+    "laravel/framework": "^11.0",
+    "orchestra/testbench-core": "^9.0",
+    "phpstan/phpstan": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Shopper\\StarterKit\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Shopper\\StarterKit\\StarterKitServiceProvider"
+      ]
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

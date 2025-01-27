@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Livewire\Actions\Logout;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Volt\Component;
@@ -51,9 +53,9 @@ new class extends Component
             </p>
 
             <div class="mt-6">
-                <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
+                <x-forms.label for="password" value="{{ __('Password') }}" class="sr-only" />
 
-                <x-text-input
+                <x-forms.input
                     wire:model="password"
                     id="password"
                     name="password"
@@ -62,17 +64,17 @@ new class extends Component
                     placeholder="{{ __('Password') }}"
                 />
 
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                <x-forms.errors :messages="$errors->get('password')" class="mt-2" />
             </div>
 
             <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
+                <x-buttons.default x-on:click="$dispatch('close')">
                     {{ __('Cancel') }}
-                </x-secondary-button>
+                </x-buttons.default>
 
-                <x-danger-button class="ms-3">
+                <x-buttons.danger class="ms-3">
                     {{ __('Delete Account') }}
-                </x-danger-button>
+                </x-buttons.danger>
             </div>
         </form>
     </x-modal>

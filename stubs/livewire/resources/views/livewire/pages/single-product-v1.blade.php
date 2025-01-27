@@ -32,7 +32,7 @@
                         <h1 class="font-heading text-xl font-semibold text-gray-900 lg:text-2xl">
                             {{ $product->name }}
                         </h1>
-                        <x-products.price :product="$product" class="text-xl font-medium text-gray-900" />
+                        <x-product.price :$product class="text-xl font-medium text-gray-900" />
                     </div>
                     <!-- Reviews -->
                     <div class="mt-4">
@@ -127,7 +127,7 @@
                                 class="h-full w-full object-cover"
                             />
                         </div>
-                        <x-products.gallery
+                        <x-product.gallery
                             :images="$product->getMedia(config('shopper.media.storage.collection_name'))"
                             :product="$product"
                         />
@@ -135,7 +135,7 @@
                 </div>
 
                 <div class="mt-8 lg:col-span-5">
-                    <livewire:components.variants-selector :product="$product" />
+                    <livewire:components.variants-selector :$product />
 
                     <!-- Product details -->
                     <div class="mt-10">
@@ -146,7 +146,7 @@
                         </div>
                     </div>
 
-                    <x-products.additionnal-infos />
+                    <x-product.additionnal-infos />
                 </div>
             </div>
         </x-container>

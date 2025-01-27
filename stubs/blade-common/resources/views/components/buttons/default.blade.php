@@ -1,9 +1,12 @@
-@props(['link' => null, 'whiteBorder' => false])
+@props([
+    'href' => null,
+    'whiteBorder' => false,
+])
 
-@if ($link)
+@if ($href)
     <x-link
-        href="{{ $link }}"
-        {{ $attributes->twMerge(['class' => 'group relative inline-flex items-center justify-center border border-gray-900 text-sm font-medium text-black bg-white shadow-sm hover:bg-gray-50 focus:outline-none']) }}
+        :$href
+        {{ $attributes->twMerge(['class' => 'group relative inline-flex py-2.5 border border-gray-900 text-sm font-medium text-black bg-white shadow-sm hover:bg-gray-50 focus:outline-none']) }}
     >
         <span
             @class([
@@ -12,11 +15,14 @@
                 'border-gray-900' => ! $whiteBorder,
             ])
         ></span>
-        {{ $slot }}
+        <span class="absolute inset-0 bg-white z-0"></span>
+        <span class="relative w-full inline-flex items-center justify-center">
+            {{ $slot }}
+        </span>
     </x-link>
 @else
     <button
-        {{ $attributes->twMerge(['class' => 'group relative inline-flex items-center justify-center border border-gray-900 text-sm font-medium text-black bg-white shadow-sm hover:bg-gray-50 focus:outline-none']) }}
+        {{ $attributes->twMerge(['class' => 'group relative inline-flex py-2.5 border border-gray-900 text-sm font-medium text-black bg-white shadow-sm hover:bg-gray-50 focus:outline-none']) }}
     >
         <span
             @class([
@@ -25,6 +31,9 @@
                 'border-gray-900' => ! $whiteBorder,
             ])
         ></span>
-        {{ $slot }}
+        <span class="absolute inset-0 bg-white z-0"></span>
+        <span class="relative w-full inline-flex items-center justify-center">
+            {{ $slot }}
+        </span>
     </button>
 @endif

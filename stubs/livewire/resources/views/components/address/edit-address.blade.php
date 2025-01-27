@@ -51,15 +51,22 @@
             </div>
         </div>
         <div class="flex items-center gap-4">
-            <x-buttons.default class="text-sm px-2.5 pb-1 pt-2" wire:click="removeAddress({{ $address->id }})"
-                wire:confirm="{{ __('Do you really want to delete this address ?') }}">
-                <x-untitledui-trash-03 class="w-5 h-5" stroke-width="1.5" aria-hidden="true" />
+            <x-buttons.default
+                class="text-sm px-2.5 pb-1 pt-2"
+                wire:click="removeAddress({{ $address->id }})"
+                wire:confirm="{{ __('Do you really want to delete this address ?') }}"
+            >
+                <x-untitledui-trash-03 class="size-5" stroke-width="1.5" aria-hidden="true" />
                 <span class="sr-only">{{ __('Delete') }}</span>
             </x-buttons.default>
-            <x-buttons.default class="px-3 pt-2 pb-1 text-sm"
-                wire:click="$dispatch('openModal', { component: 'modals.customer.address-form', arguments: { addressId: {{ $address->id }} }})">
+            <x-buttons.default
+                class="px-3 pt-2 pb-1 text-sm"
+                wire:click="$dispatch('openModal', { component: 'modals.account.address-form', arguments: { addressId: {{ $address->id }} }})"
+            >
                 <span class="inline-flex items-center gap-2">
-                    <x-untitledui-pencil-02 class="w-5 h-5 text-primary-500 group-hover:text-primary-700" stroke-width="1.5"
+                    <x-untitledui-pencil-02
+                        class="size-5 text-primary-500 group-hover:text-primary-700"
+                        stroke-width="1.5"
                         aria-hidden="true" />
                     <span>{{ __('Edit') }}</span>
                 </span>

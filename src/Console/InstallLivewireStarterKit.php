@@ -11,6 +11,9 @@ trait InstallLivewireStarterKit
 {
     protected function installLivewireStaterKit()
     {
+        // Helper...
+        copy(__DIR__.'/../../stubs/shared/app/helpers.php', app_path('helpers.php'));
+
         $this->updateComposerAutoloadFiles(function ($files) {
             return $files + ['app/helpers.php'];
         });
@@ -98,9 +101,6 @@ trait InstallLivewireStarterKit
 
         // Config...
         copy(__DIR__.'/../../stubs/shared/config/shopper/models.php', config_path('shopper/models.php'));
-
-        // Helper...
-        copy(__DIR__.'/../../stubs/shared/app/helpers.php', app_path('helpers.php'));
 
         // Routes...
         copy(__DIR__.'/../../stubs/livewire/routes/web.php', base_path('routes/web.php'));

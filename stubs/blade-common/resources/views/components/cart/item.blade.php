@@ -12,7 +12,7 @@
 @endphp
 
 <li class="flex py-6">
-    <x-products.thumbnail :product="$item->associatedModel" class="size-32 border border-gray-200 rounded-lg aspect-none" />
+    <x-product.thumbnail :product="$item->associatedModel" class="size-32 border border-gray-200 rounded-lg aspect-none" />
     <div class="flex flex-col flex-1 ml-4">
         <div class="flex justify-between text-base">
             <div>

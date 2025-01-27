@@ -1,3 +1,7 @@
+@props([
+    'title' => null,
+])
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -18,6 +22,7 @@
 
     @livewire('notifications')
     @livewire('slide-over-panel')
+    @livewire('wire-elements-modal')
 
     @filamentScripts
     @vite('resources/js/app.js')

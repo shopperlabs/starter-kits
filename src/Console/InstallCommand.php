@@ -89,7 +89,6 @@ final class InstallCommand extends Command implements PromptsForMissingInput
             (new Filesystem)->copy(__DIR__.'/../../stubs/'.$stubStack.'/tests/Pest.php', base_path('tests/Pest.php'));
         }
 
-
         return true;
     }
 
@@ -141,8 +140,8 @@ final class InstallCommand extends Command implements PromptsForMissingInput
     /**
      * Installs the given Composer Packages into the application.
      *
-     * @param array $packages
-     * @param bool $asDev
+     * @param  array  $packages
+     * @param  bool  $asDev
      * @return bool
      */
     protected function requireComposerPackages(array $packages, bool $asDev = false): bool
@@ -169,8 +168,8 @@ final class InstallCommand extends Command implements PromptsForMissingInput
     /**
      * Removes the given Composer Packages from the application.
      *
-     * @param array $packages
-     * @param bool $asDev
+     * @param  array  $packages
+     * @param  bool  $asDev
      * @return bool
      */
     protected function removeComposerPackages(array $packages, bool $asDev = false): bool
@@ -197,7 +196,7 @@ final class InstallCommand extends Command implements PromptsForMissingInput
     /**
      * Update the scripts in the "package.json" file.
      *
-     * @param callable $callback
+     * @param  callable  $callback
      * @return void
      */
     protected static function updateComposerAutoloadFiles(callable $callback): void
@@ -208,9 +207,8 @@ final class InstallCommand extends Command implements PromptsForMissingInput
 
         $content = json_decode(file_get_contents(base_path('composer.json')), true);
 
-        $content['autoload']['files'] = $callback(
-            array_key_exists('files', $content['autoload']) ? $content['autoload']['files'] : $content['autoload']
-        );
+        $content['autoload'] = array_key_exists('files', $content['autoload']) ? $content['autoload'] : array_merge($content['autoload'], ['files' => []]);
+        $content['autoload']['files'] = $callback($content['autoload']['files']);
 
         file_put_contents(
             base_path('composer.json'),
@@ -362,6 +360,8 @@ final class InstallCommand extends Command implements PromptsForMissingInput
     /**
      * Interact further with the user if they were prompted for missing arguments.
      *
+     * @param  InputInterface  $input
+     * @param  OutputInterface  $output
      * @return void
      */
     protected function afterPromptingForMissingArguments(InputInterface $input, OutputInterface $output): void

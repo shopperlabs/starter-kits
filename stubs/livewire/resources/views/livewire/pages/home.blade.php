@@ -21,15 +21,15 @@
     <x-container class="relative py-16 sm:pt-24 lg:py-40">
         <div class="sm:max-w-lg">
             <h1 class="font font-heading text-4xl font-extrabold tracking-tight text-black sm:text-6xl">
-                {{ __("C'est la saison des Boubous") }}
+                {{ __('New arrivals are here') }}
             </h1>
             <p class="mt-4 text-xl text-gray-500">
-                {{ __('Des pièces uniques simples colorées et chaleureuses pour les femmes spéciales que vous représentez pour nous 💓') }}
+                {{ __('The new arrivals have, well, newly arrived. Check out the latest options from our summer small-batch release while they\'re still in stock.') }}
             </p>
         </div>
         <div class="py-10">
-            <x-buttons.primary link="#" class="group px-8 py-3 text-center text-base font-medium">
-                {{ __('Découvrez maintenant') }}
+            <x-buttons.primary href="#" class="group px-8 py-3 text-center text-base font-medium">
+                {{ __('Shop New Arrivals') }}
                 <span
                     class="ml-2 translate-x-0 transform transition duration-200 ease-in-out group-hover:translate-x-1"
                 >
@@ -49,14 +49,11 @@
                         <h1
                             class="font-heading text-3xl font-extrabold uppercase tracking-tight text-black sm:text-4xl sm:leading-[2.75rem]"
                         >
-                            {{ __('Les produits les plus demandés') }}
+                            {{ __('Shop by collections') }}
                         </h1>
-                        <p class="mt-4 text-xl text-gray-500">
-                            {{ __('Découvrez notre magnifique Collection de t-shirts Ethniques 😍. Du rigide basique mettant en avant des motifs diversifiés sur de la douceur colorée.') }}
-                        </p>
                         <div class="mt-8">
-                            <x-buttons.primary link="#" class="px-8 py-3 font-medium uppercase tracking-wider">
-                                {{ __('Voir la collection') }}
+                            <x-buttons.primary href="#" class="px-8 py-3 font-medium uppercase tracking-wider">
+                                {{ __('View all collections') }}
                                 <x-untitledui-arrow-narrow-right class="ml-2 size-5" />
                             </x-buttons.primary>
                         </div>

@@ -4,7 +4,7 @@
 
 @if ($href)
     <x-link
-        :href="$href"
+        :$href
         {{ $attributes->twMerge(['class' => 'group relative py-2.5 inline-flex border border-transparent text-sm font-medium text-white shadow-sm focus:outline-none']) }}
     >
         <span

@@ -17,7 +17,7 @@ return [
     |
     */
 
-    'brand' => Shopper\Core\Models\Brand::class,
+    'brand' => Models\Brand::class,
 
     /*
     |--------------------------------------------------------------------------

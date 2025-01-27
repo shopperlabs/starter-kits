@@ -8,7 +8,7 @@
     <div class="mt-4 flex justify-between">
         <div>
             <h3 class="text-sm font-medium text-gray-700">
-                <x-link :href="route('single-product', $product)">
+                <x-link :href="route('single-product', $product->slug)">
                     <span aria-hidden="true" class="absolute inset-0"></span>
                     {{ $product->name }}
                 </x-link>

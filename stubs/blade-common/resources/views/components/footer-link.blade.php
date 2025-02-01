@@ -1,7 +1,7 @@
 <x-link
-    {{ $attributes->twMerge(['class' => 'text-sm text-gray-400 hover:text-white group group-link-underline']) }}
+    {{ $attributes->twMerge(['class' => 'text-sm text-gray-900 group group-link-underline']) }}
 >
-    <span class="link link-underline link-underline-white">
+    <span class="link link-underline link-underline-black">
         {{ $slot }}
     </span>
 </x-link>

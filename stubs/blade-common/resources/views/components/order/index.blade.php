@@ -57,14 +57,11 @@
             @endforeach
         </div>
         <div class="grid grid-cols-2 gap-x-5 lg:flex lg:flex-col lg:items-end lg:justify-end lg:space-y-2 lg:pl-4">
-            <x-buttons.primary class="w-full px-4" :link="route('account.orders.detail', ['number' => $order->number])">
+            <x-buttons.primary class="w-full px-4" :href="route('account.orders.detail', ['number' => $order->number])">
                 {{ __('View details') }}
             </x-buttons.primary>
             <x-buttons.default class="w-full px-4">
                 {{ __('Invoice') }}
-                <x-filament::badge size="sm" color="gray" class="ml-2">
-                    {{ __('Soon') }}
-                </x-filament::badge>
             </x-buttons.default>
         </div>
     </div>

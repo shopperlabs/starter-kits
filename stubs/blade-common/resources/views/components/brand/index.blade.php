@@ -1,12 +1,61 @@
-@props([
-    'pattern' => '#27272a',
-    'square' => '#52525b',
-])
-
-<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" {{ $attributes }}>
-    <path d="M35.8333 51.3793H164.167V194H35.8333V51.3793Z" fill="{{ $pattern }}"/>
-    <path d="M177 122.69L125.667 135.655V96.7586L177 83.7931V122.69Z" fill="{{ $square }}"/>
-    <path d="M74.3333 168.069L23 181.034V142.138L74.3333 129.172V168.069Z" fill="{{ $square }}"/>
-    <path d="M100 83.7931C82.29 83.7931 67.9167 69.2717 67.9167 51.3793H55.0833C55.0833 76.4028 75.2317 96.7586 100 96.7586C124.768 96.7586 144.917 76.4028 144.917 51.3793H132.083C132.083 69.2717 117.71 83.7931 100 83.7931Z" fill="{{ $square }}"/>
-    <path d="M100 18.9655C117.71 18.9655 132.083 33.4869 132.083 51.3793H144.917C144.917 26.3559 124.768 6 100 6C75.2317 6 55.0833 26.3559 55.0833 51.3793H67.9167C67.9167 33.4869 82.29 18.9655 100 18.9655Z" fill="{{ $pattern }}"/>
+<svg {{ $attributes }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 145">
+    <radialGradient
+        id="a"
+        cx="105"
+        cy="40"
+        gradientUnits="userSpaceOnUse"
+        r="135">
+        <stop offset="0" stop-color="#60a5fa" />
+        <stop offset="1" stop-color="#2563eb" />
+    </radialGradient>
+    <path fill="url(#a)" d="M10 35h100v110h-100z" />
+    <linearGradient
+        id="b"
+        gradientUnits="userSpaceOnUse"
+        x1="80"
+        x2="120"
+        y1="100"
+        y2="60">
+        <stop offset="0" stop-color="#dbeafe" />
+        <stop offset="1" stop-color="#93c5fd" />
+    </linearGradient>
+    <path fill="url(#b)" d="M120 90l-40 10v-30l40-10z" />
+    <linearGradient
+        id="c"
+        gradientUnits="userSpaceOnUse"
+        x2="40"
+        y1="135"
+        y2="95">
+        <stop offset="0" stop-color="#93c5fd" />
+        <stop offset="1" stop-color="#dbeafe" />
+    </linearGradient>
+    <path fill="url(#c)" d="M40 125l-40 10v-30l40-10z" />
+    <linearGradient
+        id="d"
+        gradientUnits="userSpaceOnUse"
+        x1="25"
+        x2="95"
+        y1="52.5"
+        y2="52.5">
+        <stop offset="0" stop-color="#1e40af" />
+        <stop offset="1" stop-color="#3b82f6" />
+    </linearGradient>
+    <path
+        fill="url(#d)"
+        d="M60 60c-13.8 0-25-11.2-25-25h-10c0 19.3 15.7 35 35 35s35-15.7 35-35h-10c0 13.8-11.2 25-25 25z"
+    />
+    <linearGradient
+        id="e"
+        gradientUnits="userSpaceOnUse"
+        x1="25"
+        x2="95"
+        y1="17.5"
+        y2="17.5">
+        <stop offset="0" stop-color="#3b82f6" />
+        <stop offset="1" stop-color="#1e40af" />
+    </linearGradient>
+    <path
+        fill="url(#e)"
+        d="M60 10c13.8 0 25 11.2 25 25h10c0-19.3-15.7-35-35-35s-35 15.7-35 35h10c0-13.8 11.2-25 25-25z"
+    />
 </svg>

@@ -11,6 +11,9 @@ trait InstallLivewireStarterKit
 {
     protected function installLivewireStaterKit()
     {
+        // Helper...
+        copy(__DIR__.'/../../stubs/shared/app/helpers.php', app_path('helpers.php'));
+
         $this->updateComposerAutoloadFiles(function ($files) {
             return $files + ['app/helpers.php'];
         });
@@ -99,16 +102,13 @@ trait InstallLivewireStarterKit
         // Config...
         copy(__DIR__.'/../../stubs/shared/config/shopper/models.php', config_path('shopper/models.php'));
 
-        // Helper...
-        copy(__DIR__.'/../../stubs/shared/app/helpers.php', app_path('helpers.php'));
-
         // Routes...
         copy(__DIR__.'/../../stubs/livewire/routes/web.php', base_path('routes/web.php'));
         copy(__DIR__.'/../../stubs/livewire/routes/auth.php', base_path('routes/auth.php'));
 
         // Tailwind / Vite...
         copy(__DIR__.'/../../stubs/livewire/vite.config.js', base_path('vite.config.js'));
-        copy(__DIR__.'/../../stubs/livewire/tailwind.config.js', base_path('tailwind.config.js'));
+        copy(__DIR__.'/../../stubs/shared/tailwind.config.js', base_path('tailwind.config.js'));
         copy(__DIR__.'/../../stubs/shared/postcss.config.js', base_path('postcss.config.js'));
         copy(__DIR__.'/../../stubs/shared/resources/css/app.css', resource_path('css/app.css'));
         copy(__DIR__.'/../../stubs/shared/resources/css/links.css', resource_path('css/links.css'));

@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Livewire\Pages\Checkout;
-use App\Livewire\Pages\Home;
-use App\Livewire\Pages\SingleProduct;
+use App\Livewire\Pages;
 use Illuminate\Support\Facades\Route;
+use Livewire\Volt\Volt;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', Home::class)->name('home');
-Route::get('/products/{slug}', SingleProduct::class)->name('single-product');
+Route::get('/', Pages\Home::class)->name('home');
+Route::get('/products/{slug}', Pages\SingleProduct::class)->name('single-product');
 
 Route::middleware('auth')->group(function (): void {
-    Route::view('dashboard', 'dashboard')->middleware(['verified'])->name('dashboard');
-    Route::view('profile', 'profile')->name('profile');
-    Route::get('checkout', Checkout::class)->name('checkout');
+    Volt::route('/order/confirmed/{number}', 'pages.order.confirmed')
+        ->name('order-confirmed');
+
+    Route::get('checkout', Pages\Checkout::class)->name('checkout');
 });
 
 require __DIR__.'/auth.php';

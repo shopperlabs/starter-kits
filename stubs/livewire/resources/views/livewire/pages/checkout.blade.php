@@ -1,14 +1,14 @@
 <div class="bg-white">
     <!-- Background color split screen for large screens -->
     <div class="fixed left-0 top-0 hidden h-full w-1/2 bg-white lg:block" aria-hidden="true"></div>
-    <div class="fixed right-0 top-0 hidden h-full w-1/2 bg-brand-800 lg:block" aria-hidden="true"></div>
+    <div class="fixed right-0 top-0 hidden h-full w-1/2 bg-primary-800 lg:block" aria-hidden="true"></div>
 
     <header class="relative border-b border-gray-200 bg-white text-sm font-medium text-gray-700">
         <x-container class="py-4">
             <div class="relative flex items-center gap-10">
                 <x-link :href="route('home')">
                     <span class="sr-only">{{ shopper_setting('legal_name') }}</span>
-                    <x-brand class="h-10 w-auto text-brand" aria-hidden="true" />
+                    <x-brand class="h-10 w-auto" aria-hidden="true" />
                 </x-link>
                 <x-link :href="route('home')" class="inline-flex items-center font-medium text-gray-600 hover:text-gray-900">
                     {{ __('Back to store') }}
@@ -147,7 +147,7 @@
         </section>
 
         <div class="px-4 pb-36 pt-16 sm:px-6 lg:col-start-1 lg:row-start-1 lg:px-0 lg:pb-16">
-            <livewire:checkout-wizard />
+            <livewire:components.checkout-wizard />
         </div>
     </x-container>
 </div>

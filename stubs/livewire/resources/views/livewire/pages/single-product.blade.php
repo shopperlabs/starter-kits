@@ -13,7 +13,7 @@
                             </div>
                         </div>
 
-                        <x-products.additionnal-infos />
+                        <x-product.additionnal-infos />
                     </aside>
                 </div>
 
@@ -34,8 +34,9 @@
                                 class="h-full w-full object-cover"
                             />
                         </div>
-                        @if($this->images->isNotEmpty())
-                            <x-products.gallery :images="$this->images" />
+
+                        @if ($this->images->isNotEmpty())
+                            <x-product.gallery :images="$this->images" />
                         @endif
                     </div>
                 </div>
@@ -47,40 +48,40 @@
                                 <h1 class="font-heading text-xl font-semibold text-gray-900 lg:text-2xl">
                                     {{ $product->name }}
 
-                                    @if($this->selectedVariant)
+                                    @if ($this->selectedVariant)
                                         {{ $this->selectedVariant->name }}
                                     @endif
                                 </h1>
-                                <x-products.price
+                                <x-product.price
                                     :product="$this->selectedVariant ?? $product"
                                     class="text-lg font-bold text-brand lg:text-2xl"
                                 />
                             </div>
                         </div>
 
-                        <livewire:variants-selector :product="$product" />
+                        <livewire:components.variants-selector :$product />
 
                         <!-- Policies -->
                         <section aria-labelledby="policies-heading">
-                            <h2 id="policies-heading" class="sr-only">{{ __('Nos politiques') }}</h2>
+                            <h2 id="policies-heading" class="sr-only">{{ __('Our privacy') }}</h2>
 
                             <dl class="space-y-4">
                                 <div class="border border-gray-200 bg-gray-50 p-6">
                                     <dt class="flex items-center gap-2">
-                                        <x-untitledui-globe-05 class="h-6 w-6 text-gray-400" stroke-width="1.5" aria-hidden="true" />
-                                        <span class="text-sm font-medium text-gray-900">{{ __('Livraison internationale') }}</span>
+                                        <x-untitledui-globe-05 class="size-6 text-gray-400" stroke-width="1.5" aria-hidden="true" />
+                                        <span class="text-sm font-medium text-gray-900">{{ __('International delivery') }}</span>
                                     </dt>
                                     <dd class="mt-1 text-sm text-gray-500">
-                                        {{ __('Obtenez votre commande en 2 semaines') }}
+                                        {{ __('Get your order in 2 weeks') }}
                                     </dd>
                                 </div>
                                 <div class="border border-gray-200 bg-gray-50 p-6">
                                     <dt class="flex items-center gap-2">
-                                        <x-untitledui-gift-02 class="h-6 w-6 text-gray-400" stroke-width="1.5" aria-hidden="true" />
-                                        <span class="text-sm font-medium text-gray-900">{{ __('Récompenses de fidélité') }}</span>
+                                        <x-untitledui-gift-02 class="size-6 text-gray-400" stroke-width="1.5" aria-hidden="true" />
+                                        <span class="text-sm font-medium text-gray-900">{{ __('Loyalty rewards') }}</span>
                                     </dt>
                                     <dd class="mt-1 text-sm text-gray-500">
-                                        {{ __('Obtenez des réductions et des bonus pour votre fidélité.') }}
+                                        {{ __('Don\'t look at other tees') }}
                                     </dd>
                                 </div>
                             </dl>

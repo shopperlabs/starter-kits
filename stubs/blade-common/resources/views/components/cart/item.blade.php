@@ -8,16 +8,16 @@
         currency: current_currency(),
     );
 
-    $model = $item->associatedModel instanceof \App\Models\ProductVariant ? $item->associatedModel->product : $item->associatedModel;
+    $model = $item->associatedModel instanceof \App\Models\ProductVariant ? $item->associatedModel->loadMissing('product')->product : $item->associatedModel;
 @endphp
 
 <li class="flex py-6">
-    <x-products.thumbnail :product="$item->associatedModel" class="size-32 border border-gray-200 rounded-lg aspect-none" />
+    <x-product.thumbnail :product="$item->associatedModel" class="size-32 border border-gray-200 aspect-none" />
     <div class="flex flex-col flex-1 ml-4">
         <div class="flex justify-between text-base">
             <div>
-                <h3 class="font-medium font-heading text-primary-900">
-                    <x-link :href="route('single-product', $model)">
+                <h3 class="font-medium font-heading text-primary-700">
+                    <x-link :href="route('single-product', ['slug' => $model->slug])">
                         {{ $item->name }}
                     </x-link>
                 </h3>

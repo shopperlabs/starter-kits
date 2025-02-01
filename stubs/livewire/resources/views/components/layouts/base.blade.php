@@ -1,3 +1,7 @@
+@props([
+    'title' => null,
+])
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -13,11 +17,12 @@
     @filamentStyles
     @vite('resources/css/app.css')
 </head>
-<body class="antialiased selection:bg-primary-800 selection:text-white">
+<body class="antialiased selection:bg-primary-600 selection:text-white">
     {{ $slot }}
 
     @livewire('notifications')
     @livewire('slide-over-panel')
+    @livewire('wire-elements-modal')
 
     @filamentScripts
     @vite('resources/js/app.js')

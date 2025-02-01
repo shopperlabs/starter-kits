@@ -26,8 +26,9 @@
                 ! $product->isVariant() && $product->stock < 1
             "
         >
-            <span class="absolute left-0 pl-2" wire:loading>
-                <x-loading-dots class="bg-white" />
+            <span class="absolute left-0 top-0 pl-2">
+                <x-phosphor-shopping-bag-duotone class="size-6 text-white" aria-hidden="true" wire:loading.remove />
+                <x-loading-dots class="bg-white hidden" aria-hidden="true" wire:loading.class="block" />
             </span>
             {{ __('Add to cart') }}
         </x-buttons.primary>

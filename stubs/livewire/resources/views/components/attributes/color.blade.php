@@ -25,7 +25,7 @@
                     class="relative -m-0.5 flex items-center justify-center p-0.5 focus:outline-none"
                     wire:click="$set('selectedOptionValues.{{ $option->attribute->id }}', {{ $value->id }})"
                     x-bind:class="{
-                        'ring-2 ring-brand-600': selectedValues.includes({{ $value->id }}),
+                        'ring-2 ring-primary-600': selectedValues.includes({{ $value->id }}),
                         'border border-gray-200': !selectedValues.includes({{ $value->id }})
                     }"
                 >

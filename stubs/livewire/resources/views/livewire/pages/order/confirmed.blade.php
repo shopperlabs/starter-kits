@@ -10,7 +10,13 @@ use function Livewire\Volt\state;
 state(['order' => null]);
 
 mount(function (string $number): void {
-    $this->order = Order::with(['items', 'shippingOption', 'shippingAddress', 'paymentMethod'])
+    $this->order = Order::with([
+        'items',
+        'items.product',
+        'shippingOption',
+        'shippingAddress',
+        'paymentMethod',
+    ])
         ->where('number', $number)
         ->firstOrFail();
 });
@@ -68,7 +74,7 @@ mount(function (string $number): void {
                     </div>
                 </dl>
                 <div class="mt-6 space-y-4 sm:flex sm:space-x-4 sm:space-y-0 md:mt-0">
-                    <x-buttons.default :link="route('account.orders.detail', ['number' => $order->number])" class="flex w-full px-4 py-2 text-sm md:w-auto">
+                    <x-buttons.default :href="route('account.orders.detail', ['number' => $order->number])" class="flex w-full px-4 py-2 text-sm md:w-auto">
                         {{ __('Detail') }}
                         <span class="sr-only">{{ $order->number }}</span>
                     </x-buttons.default>
@@ -90,10 +96,10 @@ mount(function (string $number): void {
                         @endforeach
                     </div>
                 </div>
-                <div class="rounded bg-gray-50 p-4">
+                <div class="bg-gray-50 p-4">
                     <div class="flex">
                         <div class="shrink-0">
-                            <x-untitledui-info-circle class="h-5 w-5 text-gray-400" stroke-width="1.5" aria-hidden="true" />
+                            <x-untitledui-info-circle class="size-5 text-gray-400" stroke-width="1.5" aria-hidden="true" />
                         </div>
                         <div class="ml-3 flex-1 md:flex md:justify-between">
                             <p class="text-sm text-gray-700">
@@ -111,7 +117,7 @@ mount(function (string $number): void {
             </div>
             <div>
                 <div class="flex items-end justify-end">
-                    <h6 class="bg-brand inline-flex w-auto px-2.5 py-1 text-sm leading-6 text-white">
+                    <h6 class="bg-primary-500 inline-flex w-auto px-2.5 py-1 text-sm leading-6 text-white">
                         {{ __('Order summary') }}
                     </h6>
                 </div>

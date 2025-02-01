@@ -12,7 +12,7 @@
 @endphp
 
 <li class="flex items-start py-6 space-x-4">
-    <x-products.thumbnail :product="$item->associatedModel" class="size-20 border aspect-none border-primary-700" />
+    <x-product.thumbnail :product="$item->associatedModel" class="size-20 border aspect-none border-primary-700" />
     <div class="flex-auto">
         <h3 class="font-medium font-heading text-white">
             <x-link :href="route('single-product', $model)">

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Livewire\Actions\Logout;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Volt\Component;
@@ -23,37 +25,36 @@ new class extends Component
     }
 }; ?>
 
-<section class="space-y-6">
+<section class="py-10 space-y-6">
     <header>
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Delete Account') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
+        <p class="mt-1 text-sm text-gray-500 max-w-2xl">
             {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
         </p>
     </header>
 
     <x-buttons.danger
-        x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
+        class="px-4"
+        x-on:click.prevent="$dispatch('open-modal', { id: 'confirm-user-deletion' })"
     >{{ __('Delete Account') }}</x-buttons.danger>
 
-    <x-modal name="confirm-user-deletion" :show="$errors->isNotEmpty()" focusable>
-        <form wire:submit="deleteUser" class="p-6">
-
+    <x-filament::modal id="confirm-user-deletion" width="xl">
+        <form wire:submit="deleteUser">
             <h2 class="text-lg font-medium text-gray-900">
                 {{ __('Are you sure you want to delete your account?') }}
             </h2>
 
-            <p class="mt-1 text-sm text-gray-600">
+            <p class="mt-2 text-sm text-gray-600">
                 {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
             </p>
 
             <div class="mt-6">
-                <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
+                <x-forms.label for="password" value="{{ __('Password') }}" class="sr-only" />
 
-                <x-text-input
+                <x-forms.input
                     wire:model="password"
                     id="password"
                     name="password"
@@ -62,18 +63,14 @@ new class extends Component
                     placeholder="{{ __('Password') }}"
                 />
 
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                <x-forms.errors :messages="$errors->get('password')" class="mt-2" />
             </div>
 
             <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
-                    {{ __('Cancel') }}
-                </x-secondary-button>
-
-                <x-danger-button class="ms-3">
-                    {{ __('Delete Account') }}
-                </x-danger-button>
+                <x-buttons.danger class="ms-3 px-4">
+                    {{ __('Confirm') }}
+                </x-buttons.danger>
             </div>
         </form>
-    </x-modal>
+    </x-filament::modal>
 </section>

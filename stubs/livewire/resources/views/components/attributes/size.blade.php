@@ -31,7 +31,7 @@
                     wire:click="$set('selectedOptionValues.{{ $option->attribute->id }}', {{ $value->id }})"
                     x-bind:class="{
                         'ring-2 ring-brand-600 ring-offset-2': selectedValues.includes({{ $value->id }}),
-                        'border-transparent bg-brand-600 text-white hover:bg-brand': selectedValues.includes({{ $value->id }}),
+                        'border-transparent bg-primary-600 text-white hover:bg-primary-500': selectedValues.includes({{ $value->id }}),
                         'border-gray-200 bg-white text-gray-900 hover:bg-gray-50': !selectedValues.includes({{ $value->id }})
                     }"
                 >

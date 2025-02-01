@@ -19,7 +19,7 @@
     </svg>
 
     <x-container class="relative py-16 sm:pt-24 lg:py-40">
-        <div class="sm:max-w-lg">
+        <div class="sm:max-w-xl">
             <h1 class="font font-heading text-4xl font-extrabold tracking-tight text-black sm:text-6xl">
                 {{ __('New arrivals are here') }}
             </h1>
@@ -47,7 +47,7 @@
                 <div class="flex self-center sm:col-span-2">
                     <div>
                         <h1
-                            class="font-heading text-3xl font-extrabold uppercase tracking-tight text-black sm:text-4xl sm:leading-[2.75rem]"
+                            class="font-heading text-2xl font-extrabold tracking-tight text-gray-950 sm:text-3xl"
                         >
                             {{ __('Shop by collections') }}
                         </h1>
@@ -61,7 +61,7 @@
                 </div>
             </div>
             <div class="mt-16 max-w-3xl lg:mt-32 lg:max-w-none">
-                <h2 class="font-heading text-2xl font-semibold tracking-tight text-gray-900">Trending products</h2>
+                <h2 class="font-heading text-2xl font-semibold tracking-tight text-gray-950 sm:text-3xl">Trending products</h2>
 
                 <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                     @foreach ($products as $product)

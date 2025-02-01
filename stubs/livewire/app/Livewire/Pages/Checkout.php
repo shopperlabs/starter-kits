@@ -4,56 +4,36 @@ declare(strict_types=1);
 
 namespace App\Livewire\Pages;
 
-use Filament\Forms;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Form;
+use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 #[Layout('components.layouts.templates.light')]
-class Checkout extends Component implements HasForms
+class Checkout extends Component
 {
-    use InteractsWithForms;
+    public ?string $sessionKey = null;
 
-    public array $data = [];
-
-    public function form(Form $form): Form
+    public function mount(): void
     {
-        return $form
-            ->schema([
-                Forms\Components\Group::make()
-                    ->schema([
-                        Forms\Components\TextInput::make('address.street')
-                            ->label(__('Adresse'))
-                            ->columnSpan('full'),
-                        Forms\Components\TextInput::make('address.street_plus')
-                            ->label(__('Appartement, suite, etc.'))
-                            ->columnSpan('full'),
-                        Forms\Components\TextInput::make('address.city')
-                            ->label(__('Ville'))
-                            ->columnSpan(['lg' => 1]),
-                        Forms\Components\TextInput::make('address.state')
-                            ->label(__('Province / Région'))
-                            ->columnSpan(['lg' => 1]),
-                        Forms\Components\TextInput::make('address.postal_code')
-                            ->label(__('Code postal'))
-                            ->columnSpan(['lg' => 1]),
-                    ])
-                    ->columns(3),
-            ])
-            ->statePath('data');
-    }
+        $this->sessionKey = session()->getId();
 
-    public function createOrder(): void
-    {
-        dump($this->form->getState());
+        // @phpstan-ignore-next-line
+        if (CartFacade::session($this->sessionKey)->isEmpty()) {
+            if (session()->exists('checkout')) {
+                session()->forget('checkout');
+            }
+
+            $this->redirect(route('home'), true);
+        }
     }
 
     public function render(): View
     {
-        return view('livewire.pages.checkout')
+        return view('livewire.pages.checkout', [
+            'items' => CartFacade::session($this->sessionKey)->getContent(), // @phpstan-ignore-line
+            'subtotal' => CartFacade::session($this->sessionKey)->getSubTotal(), // @phpstan-ignore-line
+        ])
             ->title(__('Proceed to checkout'));
     }
 }

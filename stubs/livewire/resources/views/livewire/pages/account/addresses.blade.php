@@ -8,7 +8,7 @@
         <x-buttons.default
             type="button"
             wire:click="$dispatch('openModal', { component: 'modals.account.address-form' })"
-            class="w-full px-8 py-2 text-sm sm:w-auto"
+            class="w-full px-4 sm:w-auto"
         >
             {{ __('Add address') }}
         </x-buttons.default>

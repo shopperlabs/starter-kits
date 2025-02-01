@@ -108,7 +108,7 @@ trait InstallLivewireStarterKit
 
         // Tailwind / Vite...
         copy(__DIR__.'/../../stubs/livewire/vite.config.js', base_path('vite.config.js'));
-        copy(__DIR__.'/../../stubs/livewire/tailwind.config.js', base_path('tailwind.config.js'));
+        copy(__DIR__.'/../../stubs/shared/tailwind.config.js', base_path('tailwind.config.js'));
         copy(__DIR__.'/../../stubs/shared/postcss.config.js', base_path('postcss.config.js'));
         copy(__DIR__.'/../../stubs/shared/resources/css/app.css', resource_path('css/app.css'));
         copy(__DIR__.'/../../stubs/shared/resources/css/links.css', resource_path('css/links.css'));

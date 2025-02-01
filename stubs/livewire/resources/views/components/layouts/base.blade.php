@@ -17,7 +17,7 @@
     @filamentStyles
     @vite('resources/css/app.css')
 </head>
-<body class="antialiased selection:bg-primary-800 selection:text-white">
+<body class="antialiased selection:bg-primary-600 selection:text-white">
     {{ $slot }}
 
     @livewire('notifications')

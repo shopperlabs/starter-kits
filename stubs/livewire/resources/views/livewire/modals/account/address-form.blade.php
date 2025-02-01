@@ -115,7 +115,7 @@
         <x-buttons.default
             type="button"
             wire:click="$dispatch('closeModal')"
-            class="w-full mt-3 text-sm sm:mt-0 sm:w-auto"
+            class="w-full mt-3 text-sm sm:mt-0 sm:w-auto px-4"
         >
             {{ __('shopper::forms.actions.cancel') }}
         </x-buttons.default>

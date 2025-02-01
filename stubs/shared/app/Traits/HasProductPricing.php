@@ -13,7 +13,8 @@ trait HasProductPricing
     {
         $currencyCode = current_currency();
 
-        $price = $this->prices
+        $price = $this->loadMissing('prices', 'prices.currency')
+            ->prices
             ->map(function ($price) use ($currencyCode) {
                 $price->amount = is_no_division_currency($currencyCode)
                     ? $price->amount

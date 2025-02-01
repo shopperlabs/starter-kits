@@ -11,7 +11,7 @@
     </div>
 
     <div class="mt-6">
-        <a href="#" class="relative group w-full inline-flex justify-center py-2.5 px-4 border border-gray-200 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+        <a href="#" class="relative group w-full inline-flex justify-center py-2.5 px-4 border border-gray-200 bg-white text-sm font-medium text-gray-500 hover:text-gray-700 hover:bg-gray-50">
             <span>{{ __('Sign with Google') }}</span>
             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
                 <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" aria-hidden="true">

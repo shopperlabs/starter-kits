@@ -27,13 +27,9 @@ class VariantsSelector extends Component
 
     public function mount(): void
     {
-        $this->product->load(
-            'inventoryHistories',
-            'variants',
-            'variants.values',
+        $this->product->loadMissing([
             'variants.values.attribute',
-            'variants.inventoryHistories',
-        );
+        ])->loadCount('variants');
 
         $this->selectedOptionValues = $this->productOptions->mapWithKeys(function (OptionData $option): array {
             return [$option->attribute->id => $option->values->first()->id];
@@ -47,9 +43,9 @@ class VariantsSelector extends Component
         $model = $this->variant ?? $this->product;
 
         CartFacade::session(session()->getId())->add([
-            'id' => $model->id,
+            'id' => $model->created_at->timestamp * $model->id,
             'name' => $this->product->name,
-            'price' => $model->getPrice()->amount->amount,
+            'price' => $model->getPrice()->value->amount,
             'quantity' => 1,
             'attributes' => $this->variant
                 ? $this->variant->values->mapWithKeys(fn ($value) => [
@@ -60,8 +56,8 @@ class VariantsSelector extends Component
         ]);
 
         Notification::make()
-            ->title(__('Panier modifié'))
-            ->body(__('Le produit a été ajouté au panier'))
+            ->title(__('Cart updated'))
+            ->body(__('Product / variant has been added to your cart'))
             ->success()
             ->send();
 
@@ -71,11 +67,16 @@ class VariantsSelector extends Component
     #[Computed]
     public function variant(): ?ProductVariant
     {
-        return $this->product->variants->first(function ($variant) {
-            return ! $variant->values->pluck('id')
-                ->diff(collect($this->selectedOptionValues)->values())
-                ->count();
-        });
+        return $this->product->loadMissing([
+            'variants.values',
+            'variants.values.attribute',
+        ])
+            ->variants
+            ->first(
+                fn ($variant) => ! $variant->values->pluck('id')
+                    ->diff(collect($this->selectedOptionValues)->values())
+                    ->count()
+            );
     }
 
     public function updatedSelectedOptionValues(): void
@@ -86,13 +87,21 @@ class VariantsSelector extends Component
     #[Computed]
     public function productOptionValues(): Collection
     {
-        return $this->product->variants->pluck('values')->flatten();
+        return $this->product->loadMissing([
+            'variants.values',
+            'variants.values.attribute',
+        ])
+            ->variants
+            ->pluck('values')
+            ->flatten();
     }
 
     #[Computed]
     public function productOptions(): Collection
     {
-        return $this->productOptionValues->unique('id')->groupBy('attribute_id')
+        return $this->productOptionValues
+            ->unique('id')
+            ->groupBy('attribute_id')
             ->map(function ($values) {
                 return new OptionData(
                     attribute: $values->first()->attribute,

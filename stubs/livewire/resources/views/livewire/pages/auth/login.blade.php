@@ -19,7 +19,7 @@ new #[Layout('components.layouts.templates.app')] class extends Component
 
         Session::regenerate();
 
-        $this->redirectIntended(default: route('account.show', absolute: false), navigate: true);
+        $this->redirectIntended(default: route('account', absolute: false), navigate: true);
     }
 }; ?>
 
@@ -45,7 +45,7 @@ new #[Layout('components.layouts.templates.app')] class extends Component
 
     <div class="relative min-h-full flex flex-col justify-center py-12 divide-y divide-gray-200 lg:max-w-2xl lg:mx-auto">
         <div class="sm:mx-auto sm:w-full sm:max-w-md py-8">
-            <h2 class="text-2xl font-medium text-gray-900 font-heading">
+            <h2 class="font-heading text-2xl font-semibold text-gray-900">
                 {{ __('I already have an account') }}
             </h2>
             <div class="my-6 space-y-4">
@@ -64,9 +64,9 @@ new #[Layout('components.layouts.templates.app')] class extends Component
                     <div>
                         <x-forms.label for="password" :value="__('Password')" />
                         <x-forms.input wire:model="form.password" id="password" class="block mt-1 w-full"
-                                      type="password"
-                                      name="password"
-                                      required autocomplete="current-password" />
+                                       type="password"
+                                       name="password"
+                                       required autocomplete="current-password" />
 
                         <x-forms.errors :messages="$errors->get('form.password')" class="mt-2" />
                     </div>
@@ -84,7 +84,7 @@ new #[Layout('components.layouts.templates.app')] class extends Component
                             {{ __('Forgot your password?') }}
                         </x-link>
 
-                        <x-buttons.submit :title="__('Log in')" wire:loading.attr="data-loading" class="w-full px-4 text-base" />
+                        <x-buttons.submit :title="__('Log in')" wire:loading.attr="data-loading" class="w-full px-4" />
                     </div>
                 </form>
             </div>
@@ -93,15 +93,15 @@ new #[Layout('components.layouts.templates.app')] class extends Component
         </div>
         <div class="sm:mx-auto sm:w-full sm:max-w-md py-8">
             <div>
-                <h2 class="text-2xl font-medium text-primary-900 font-heading">
+                <h2 class="font-heading text-xl font-semibold text-gray-900">
                     {{ __('New customer') }}
                 </h2>
-                <p class="mt-3 text-sm leading-5 text-gray-500">
+                <p class="mt-3 text-sm/5 text-gray-500">
                     {{ __('Create your own space for an enhanced shopping experience.') }}
                 </p>
             </div>
             <div class="mt-6">
-                <x-buttons.default :link="route('register')" class="w-full px-4 text-base">
+                <x-buttons.default :href="route('register')" class="w-full px-4">
                     {{ __('Create account') }}
                 </x-buttons.default>
             </div>

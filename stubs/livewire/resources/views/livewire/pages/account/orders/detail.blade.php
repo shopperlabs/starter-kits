@@ -15,6 +15,7 @@ state(['order' => null]);
 mount(function (string $number): void {
     $this->order = Order::with([
         'items',
+        'items.product',
         'shippingOption',
         'shippingAddress',
         'paymentMethod',
@@ -83,7 +84,7 @@ title(__('Details of your order'));
             {{ __('Do you have a problem with your order? Our customer service is here to help') }}
         </p>
         <div class="mt-4">
-            <x-buttons.default link="/" class="px-4">
+            <x-buttons.default href="/" class="px-4">
                 {{ __('Contact us') }}
             </x-buttons.default>
         </div>

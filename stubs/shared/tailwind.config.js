@@ -34,7 +34,7 @@ export default {
         },
       },
       colors: {
-        primary: colors.zinc,
+        primary: colors.blue,
       },
       fontFamily: {
         sans: ['Questrial', ...defaultTheme.fontFamily.sans],

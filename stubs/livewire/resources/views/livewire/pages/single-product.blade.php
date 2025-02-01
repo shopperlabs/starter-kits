@@ -34,7 +34,8 @@
                                 class="h-full w-full object-cover"
                             />
                         </div>
-                        @if($this->images->isNotEmpty())
+
+                        @if ($this->images->isNotEmpty())
                             <x-product.gallery :images="$this->images" />
                         @endif
                     </div>
@@ -47,7 +48,7 @@
                                 <h1 class="font-heading text-xl font-semibold text-gray-900 lg:text-2xl">
                                     {{ $product->name }}
 
-                                    @if($this->selectedVariant)
+                                    @if ($this->selectedVariant)
                                         {{ $this->selectedVariant->name }}
                                     @endif
                                 </h1>
@@ -77,10 +78,10 @@
                                 <div class="border border-gray-200 bg-gray-50 p-6">
                                     <dt class="flex items-center gap-2">
                                         <x-untitledui-gift-02 class="size-6 text-gray-400" stroke-width="1.5" aria-hidden="true" />
-                                        <span class="text-sm font-medium text-gray-900">{{ __('Fidelity rewards') }}</span>
+                                        <span class="text-sm font-medium text-gray-900">{{ __('Loyalty rewards') }}</span>
                                     </dt>
                                     <dd class="mt-1 text-sm text-gray-500">
-                                        {{ __('Get discounts and bonuses for your fidelity.') }}
+                                        {{ __('Don\'t look at other tees') }}
                                     </dd>
                                 </div>
                             </dl>

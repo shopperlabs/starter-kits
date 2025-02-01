@@ -1,0 +1,63 @@
+name: tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  stub-tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+      matrix:
+        stack: [livewire]
+        laravel: ['11.x-dev']
+
+    name: Test Stubs - Laravel ${{ matrix.laravel }} - ${{ matrix.stack }}
+
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          extensions: dom, curl, libxml, mbstring, zip
+          ini-values: error_reporting=E_ALL
+          tools: composer:v2
+          coverage: none
+
+      - name: Setup Laravel
+        run: |
+          composer create-project laravel/laravel:^${{ matrix.laravel }} .
+          composer require shopper/starter-kits:@dev --no-interaction --no-update
+          composer config repositories.starter-kits '{"type": "path", "url": "starter-kits"}' --file composer.json
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          path: 'starter-kits'
+
+      - name: Install Starter kit dependencies
+        run: |
+          composer update "shopper/starter-kits" --prefer-dist --no-interaction --no-progress -W
+
+      - name: Setup Shopper & Install Starter kit
+        run: |
+          php artisan shopper:install --no-interaction
+          php artisan shopper:starter-kit:install ${{ matrix.stack }} --pest
+
+      - name: Install NPM dependencies
+        run: npm i
+
+      - name: Compile assets
+        run: npm run build
+
+      - name: Execute tests
+        run: vendor/bin/pest --group=auth,account,pages
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ":memory:"

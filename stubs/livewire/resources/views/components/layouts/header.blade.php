@@ -12,6 +12,9 @@
                 @auth
                     <livewire:components.account-menu />
                 @else
+                    <x-link :href="route('login')" class="text-sm font-medium text-gray-700 hover:text-gray-800">
+                        {{ __('Login') }}
+                    </x-link>
                     <span class="h-6 w-px bg-gray-200" aria-hidden="true"></span>
                     <x-link :href="route('register')" class="text-sm font-medium text-gray-700 hover:text-gray-800">
                         {{ __('Register') }}

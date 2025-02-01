@@ -7,7 +7,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
 new #[Layout('components.layouts.templates.account')] class extends Component {
-    #[Computed]
+    #[Computed(persist: true)]
     public function links(): array
     {
         return [

@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 use Shopper\Core\Models\Order;
 
-use function Livewire\Volt\mount;
-use function Livewire\Volt\state;
-use function Livewire\Volt\title;
-use function Livewire\Volt\layout;
+use function Livewire\Volt\{layout,mount,state,title};
 
 layout('components.layouts.templates.account');
+
 state(['order' => null]);
 
 mount(function (string $number): void {

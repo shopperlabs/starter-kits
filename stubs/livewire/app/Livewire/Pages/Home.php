@@ -6,8 +6,10 @@ namespace App\Livewire\Pages;
 
 use App\Models\Product;
 use Illuminate\Contracts\View\View;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
+#[Layout('components.layouts.templates.app')]
 class Home extends Component
 {
     public function render(): View

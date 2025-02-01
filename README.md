@@ -10,7 +10,7 @@ This repository is a base forked of Laravel Breeze, and is give as an example wa
 After install and setup Shopper, you need to run the following  command to install the starter kit
 
 ```bash
-composer require shopper/starter-kits
+composer require shopper/starter-kits --dev
 ```
 
 After installing the package, you may execute the shopper:starter-kit:install Artisan command. This command accepts the name of the stack you prefer (livewire, blade or inertia)

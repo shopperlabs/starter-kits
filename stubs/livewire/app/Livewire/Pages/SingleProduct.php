@@ -9,12 +9,14 @@ use App\Models\ProductVariant;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 /**
  * @property-read ProductVariant $selectedVariant
  */
+#[Layout('components.layouts.templates.app')]
 class SingleProduct extends Component
 {
     public ?Product $product = null;

@@ -62,5 +62,4 @@ describe(Login::class, function (): void {
 
         $this->assertGuest();
     });
-})
-    ->group('auth');
+})->group('auth');

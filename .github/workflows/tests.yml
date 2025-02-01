@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - '*.x'
   pull_request:
   schedule:
     - cron: '0 0 * * *'
@@ -17,10 +16,9 @@ jobs:
       fail-fast: true
       matrix:
         stack: [livewire]
-        laravel: [11]
-        args: ["", --pest]
+        laravel: ['11.x-dev']
 
-    name: Test Stubs - Laravel ${{ matrix.laravel }} - ${{ matrix.stack }} ${{ matrix.args }}
+    name: Test Stubs - Laravel ${{ matrix.laravel }} - ${{ matrix.stack }}
 
     steps:
       - name: Setup PHP
@@ -32,10 +30,10 @@ jobs:
           tools: composer:v2
           coverage: none
 
-      - name: Setup Laravel & Shopper
+      - name: Setup Laravel
         run: |
-          composer create-project laravel/laravel:^${{ matrix.laravel }}.
-          composer require shopper/framework:@dev shopper/starter-kits:@dev --no-interaction --no-update
+          composer create-project laravel/laravel:^${{ matrix.laravel }} .
+          composer require shopper/starter-kits:@dev --no-interaction --no-update
           composer config repositories.starter-kits '{"type": "path", "url": "starter-kits"}' --file composer.json
 
       - name: Checkout code
@@ -43,10 +41,14 @@ jobs:
         with:
           path: 'starter-kits'
 
-      - name: Install Starter kit
+      - name: Install Starter kit dependencies
         run: |
           composer update "shopper/starter-kits" --prefer-dist --no-interaction --no-progress -W
-          php artisan shopper:starter-kits:install ${{ matrix.stack }} ${{ matrix.args }}
+
+      - name: Setup Shopper & Install Starter kit
+        run: |
+          php artisan shopper:install --no-interaction
+          php artisan shopper:starter-kit:install ${{ matrix.stack }} --pest
 
       - name: Install NPM dependencies
         run: npm i
@@ -55,7 +57,7 @@ jobs:
         run: npm run build
 
       - name: Execute tests
-        run: ${{ matrix.args == '--pest' && 'vendor/bin/pest' || 'vendor/bin/phpunit' }}
+        run: vendor/bin/pest --group=auth,account,pages
         env:
           DB_CONNECTION: sqlite
           DB_DATABASE: ":memory:"

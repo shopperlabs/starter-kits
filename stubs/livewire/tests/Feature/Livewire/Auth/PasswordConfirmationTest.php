@@ -7,42 +7,44 @@ namespace Tests\Feature\Auth;
 use App\Models\User;
 use Livewire\Volt\Volt;
 
-test('confirm password screen can be rendered', function (): void {
-    $user = User::factory()->create();
+describe('PasswordConfirmation', function (): void {
+    test('confirm password screen can be rendered', function (): void {
+        $user = User::factory()->create();
 
-    $response = $this->actingAs($user)->get('/confirm-password');
+        $response = $this->actingAs($user)->get('/confirm-password');
 
-    $response
-        ->assertSeeVolt('pages.auth.confirm-password')
-        ->assertStatus(200);
-});
+        $response
+            ->assertSeeVolt('pages.auth.confirm-password')
+            ->assertStatus(200);
+    });
 
-test('password can be confirmed', function (): void {
-    $user = User::factory()->create();
+    test('password can be confirmed', function (): void {
+        $user = User::factory()->create();
 
-    $this->actingAs($user);
+        $this->actingAs($user);
 
-    $component = Volt::test('pages.auth.confirm-password')
-        ->set('password', 'password');
+        $component = Volt::test('pages.auth.confirm-password')
+            ->set('password', 'password');
 
-    $component->call('confirmPassword');
+        $component->call('confirmPassword');
 
-    $component
-        ->assertRedirect('/account')
-        ->assertHasNoErrors();
-});
+        $component
+            ->assertRedirect('/account')
+            ->assertHasNoErrors();
+    });
 
-test('password is not confirmed with invalid password', function (): void {
-    $user = User::factory()->create();
+    test('password is not confirmed with invalid password', function (): void {
+        $user = User::factory()->create();
 
-    $this->actingAs($user);
+        $this->actingAs($user);
 
-    $component = Volt::test('pages.auth.confirm-password')
-        ->set('password', 'wrong-password');
+        $component = Volt::test('pages.auth.confirm-password')
+            ->set('password', 'wrong-password');
 
-    $component->call('confirmPassword');
+        $component->call('confirmPassword');
 
-    $component
-        ->assertNoRedirect()
-        ->assertHasErrors('password');
+        $component
+            ->assertNoRedirect()
+            ->assertHasErrors('password');
+    });
 });

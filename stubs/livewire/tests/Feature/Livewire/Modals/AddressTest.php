@@ -81,5 +81,4 @@ describe(Addresses::class, function (): void {
         expect(Address::query()->count())
             ->toBe(0);
     });
-})
-    ->group('address');
+})->group('account');

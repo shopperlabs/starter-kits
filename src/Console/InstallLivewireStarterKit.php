@@ -23,7 +23,6 @@ trait InstallLivewireStarterKit
             'darryldecode/cart:^4.2',
             'laravelcm/livewire-slide-overs:^1.0',
             'livewire/volt:^1.0',
-            'notchpay/notchpay-php:^1.6',
             'wire-elements/modal:^2.0'
         ])) {
             return self::FAILURE;
@@ -129,7 +128,5 @@ trait InstallLivewireStarterKit
         }
 
         $this->components->info('Livewire starter kit installed successfully 🚀.');
-
-        $this->comment("Finally, don't forget to change the `layout` key in the livewire config to `components.layouts.templates.app`");
     }
 }

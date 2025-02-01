@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 use Shopper\Core\Models\Order;
 
-use function Livewire\Volt\mount;
-use function Livewire\Volt\state;
+use function Livewire\Volt\{mount,state,layout};
+
+layout('components.layouts.templates.app');
 
 state(['order' => null]);
 

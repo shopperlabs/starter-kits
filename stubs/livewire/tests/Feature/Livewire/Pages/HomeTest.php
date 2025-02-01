@@ -14,4 +14,4 @@ describe(Home::class, function (): void {
         Livewire::test(Home::class)
             ->assertSuccessful();
     });
-});
+})->group('pages');

@@ -9,7 +9,7 @@ use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Volt\Volt;
 
-describe('Auth/PasswordReset', function (): void {
+describe('PasswordReset', function (): void {
     test('reset password link screen can be rendered', function (): void {
         $response = $this->get('/forgot-password');
 
@@ -74,5 +74,4 @@ describe('Auth/PasswordReset', function (): void {
             return true;
         });
     })->skip();
-})
-    ->group('auth');
+})->group('auth');

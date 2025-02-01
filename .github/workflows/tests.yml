@@ -34,8 +34,8 @@ jobs:
 
       - name: Setup Laravel & Shopper
         run: |
-          composer create-project laravel/laravel:^${{ matrix.laravel }} .
-          composer require shopper/framework shopper/starter-kits:@dev --dev --no-interaction --no-update
+          composer create-project laravel/laravel:^${{ matrix.laravel }}.
+          composer require shopper/framework:@dev shopper/starter-kits:@dev --no-interaction --no-update
           composer config repositories.starter-kits '{"type": "path", "url": "starter-kits"}' --file composer.json
 
       - name: Checkout code

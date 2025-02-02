@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Livewire\Pages;
 
+use App\Models\Collection;
 use App\Models\Product;
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Layout;
@@ -24,6 +25,10 @@ class Home extends Component
                 'prices.currency',
             ])
                 ->publish()
+                ->get(),
+            'collections' => Collection::with(['media'])
+                ->select('id', 'slug', 'name')
+                ->take(3)
                 ->get(),
         ]);
     }

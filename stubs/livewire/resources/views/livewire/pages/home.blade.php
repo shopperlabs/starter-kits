@@ -29,7 +29,7 @@
         </div>
         <div class="py-10">
             <x-buttons.primary href="#" class="group px-8 py-3 text-center text-base font-medium">
-                {{ __('Shop New Arrivals') }}
+                {{ __('Shop now') }}
                 <span
                     class="ml-2 translate-x-0 transform transition duration-200 ease-in-out group-hover:translate-x-1"
                 >
@@ -43,32 +43,43 @@
 
     <div class="bg-gray-50">
         <x-container class="py-16 lg:py-24">
-            <div class="lg:grid lg:grid-cols-6 lg:gap-10">
-                <div class="flex self-center sm:col-span-2">
-                    <div>
-                        <h1
-                            class="font-heading text-2xl font-extrabold tracking-tight text-gray-950 sm:text-3xl"
-                        >
-                            {{ __('Shop by collections') }}
-                        </h1>
-                        <div class="mt-8">
-                            <x-buttons.primary href="#" class="px-8 py-3 font-medium uppercase tracking-wider">
-                                {{ __('View all collections') }}
-                                <x-untitledui-arrow-narrow-right class="ml-2 size-5" />
-                            </x-buttons.primary>
-                        </div>
+            @if($collections->isNotEmpty())
+                <section aria-labelledby="collection-heading" class="mx-auto max-w-xl lg:max-w-none">
+                    <h2 id="collection-heading" class="font-heading text-2xl font-extrabold tracking-tight text-gray-950 sm:text-3xl">
+                        {{ __('Shop by Collection') }}
+                    </h2>
+                    <p class="mt-2 text-base text-gray-500">
+                        Each season, we collaborate with world-class designers to create a collection inspired by the natural world.
+                    </p>
+
+                    <div class="mt-10 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:space-y-0">
+                        @foreach($collections as $collection)
+                            <x-link href="#" class="group block">
+                                <img
+                                    src="{{ $collection->getFirstMediaUrl(config('shopper.media.storage.thumbnail_collection')) }}"
+                                    alt="{{ $collection->name }}"
+                                    class="aspect-[3/2] w-full object-cover group-hover:opacity-75 lg:aspect-[5/6]"
+                                />
+                                <h3 class="mt-2 text-base font-semibold text-gray-900">
+                                    {{ $collection->name }}
+                                </h3>
+                            </x-link>
+                        @endforeach
                     </div>
-                </div>
-            </div>
-            <div class="mt-16 max-w-3xl lg:mt-32 lg:max-w-none">
-                <h2 class="font-heading text-2xl font-semibold tracking-tight text-gray-950 sm:text-3xl">Trending products</h2>
+                </section>
+            @endif
+
+            <section aria-labelledby="products-list" class="mt-16 max-w-3xl lg:mt-32 lg:max-w-none">
+                <h2 class="font-heading text-2xl font-semibold tracking-tight text-gray-950 sm:text-3xl">
+                    {{ __('Trending products') }}
+                </h2>
 
                 <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                     @foreach ($products as $product)
                         <x-product.card :product="$product" />
                     @endforeach
                 </div>
-            </div>
+            </section>
         </x-container>
     </div>
 </div>

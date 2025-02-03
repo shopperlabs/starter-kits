@@ -15,13 +15,6 @@ trait HasProductPricing
 
         $price = $this->loadMissing('prices', 'prices.currency')
             ->prices
-            ->map(function ($price) use ($currencyCode) {
-                $price->amount = is_no_division_currency($currencyCode)
-                    ? $price->amount
-                    : $price->amount * 100;
-
-                return $price;
-            })
             ->reject(fn ($price) => $price->currency->code !== $currencyCode)
             ->first();
 

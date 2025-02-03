@@ -152,8 +152,10 @@
                 </div>
             </div>
 
-            <!-- Zones Selector -->
-            <x-zones-selector />
+            @if(session()->has('zone'))
+                <!-- Zones Selector -->
+                <x-zones-selector />
+            @endif
         </div>
         <div class="flex flex-col items-center border-t border-gray-200 py-8 sm:flex-row sm:justify-between lg:py-10">
             <p class="text-sm text-gray-700">

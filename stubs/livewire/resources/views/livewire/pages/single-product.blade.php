@@ -13,52 +13,25 @@
                             </div>
                         </div>
 
-                        <x-product.additionnal-infos />
+                        <x-product.additionnal-infos
+                            :product="$product"
+                            :categories="$product->categories->pluck('name')->join(', ')"
+                        />
                     </aside>
                 </div>
 
                 <!-- Product gallery -->
                 <div class="lg:col-span-6 lg:px-8">
-                    <h2 class="sr-only">{{ $product->name }} {{ __('Images') }}</h2>
-
-                    <div
-                        @class([
-                            'grid grid-cols-1 lg:grid-cols-2 lg:gap-8',
-                            'lg:grid-rows-3' => $this->images->isNotEmpty()
-                        ])
-                    >
-                        <div class="lg:col-span-2 lg:row-span-2">
-                            <img
-                                src="{{ $this->thumbnail }}"
-                                alt="{{ $product->name }} thumbnail"
-                                class="h-full w-full object-cover"
-                            />
-                        </div>
-
-                        @if ($this->images->isNotEmpty())
-                            <x-product.gallery :images="$this->images" />
-                        @endif
-                    </div>
+                    <livewire:components.product.images
+                        :thumbnail="$this->product->getFirstMediaUrl(config('shopper.media.storage.thumbnail_collection'))"
+                        :images="$this->product->getMedia(config('shopper.media.storage.collection_name'))->map(function ($media) {
+                            return $media->getUrl();
+                        })->toArray()"
+                    />
                 </div>
 
                 <div class="lg:col-span-3">
                     <aside class="space-y-10 lg:sticky lg:top-40" aria-labelledby="product-variant">
-                        <div>
-                            <div class="space-y-1">
-                                <h1 class="font-heading text-xl font-semibold text-gray-900 lg:text-2xl">
-                                    {{ $product->name }}
-
-                                    @if ($this->selectedVariant)
-                                        {{ $this->selectedVariant->name }}
-                                    @endif
-                                </h1>
-                                <x-product.price
-                                    :product="$this->selectedVariant ?? $product"
-                                    class="text-lg font-bold text-brand lg:text-2xl"
-                                />
-                            </div>
-                        </div>
-
                         <livewire:components.variants-selector :$product />
 
                         <!-- Policies -->

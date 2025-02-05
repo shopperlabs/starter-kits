@@ -3,7 +3,7 @@
     'containerClass' => null,
 ])
 
-<div @class(['aspect-1 overflow-hidden', $containerClass])>
+<div @class(['aspect-1 ring-1 ring-gray-100 overflow-hidden', $containerClass])>
     <img
         src="{{ $product->getFirstMediaUrl(config('shopper.media.storage.thumbnail_collection')) }}"
         alt="{{ $product->name}} thumbnail"

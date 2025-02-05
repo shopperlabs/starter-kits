@@ -11,36 +11,37 @@ use Darryldecode\Cart\Facades\CartFacade;
 use Filament\Notifications\Notification;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 /**
  * @property-read Collection $productOptionValues
  * @property-read Collection $productOptions
+ * @property-read Collection $variants
  * @property-read ProductVariant | null $variant
  */
 class VariantsSelector extends Component
 {
     public Product $product;
 
+    public ?int $selectedVariantId = null;
+
     public array $selectedOptionValues = [];
-
-    public function mount(): void
-    {
-        $this->product->loadMissing([
-            'variants.values.attribute',
-        ])->loadCount('variants');
-
-        $this->selectedOptionValues = $this->productOptions->mapWithKeys(function (OptionData $option): array {
-            return [$option->attribute->id => $option->values->first()->id];
-        })->toArray();
-
-        $this->dispatch('variant.selected', $this->selectedOptionValues);
-    }
 
     public function addToCart(): void
     {
         $model = $this->variant ?? $this->product;
+
+        if (! $model->getPrice()) {
+            Notification::make()
+                ->title(__('Cart Error'))
+                ->body(__('You cannot add product without price in you cart'))
+                ->danger()
+                ->send();
+
+            return;
+        }
 
         CartFacade::session(session()->getId())->add([
             'id' => $model->created_at->timestamp * $model->id,
@@ -48,9 +49,7 @@ class VariantsSelector extends Component
             'price' => $model->getPrice()->value->amount,
             'quantity' => 1,
             'attributes' => $this->variant
-                ? $this->variant->values->mapWithKeys(fn ($value) => [
-                    $value->attribute->name => $value->value,
-                ])->toArray()
+                ? $this->getVariantAttributes()
                 : [],
             'associatedModel' => $model,
         ]);
@@ -64,36 +63,44 @@ class VariantsSelector extends Component
         $this->dispatch('cartUpdated');
     }
 
+    #[Computed(persist: true)]
+    public function variants(): Collection
+    {
+        return Cache::remember(
+            key: 'product.'. $this->product->id .'.variants',
+            ttl: now()->addWeek(),
+            callback: fn () => $this->product
+                ->variants
+                ->load([
+                    'inventoryHistories',
+                    'media',
+                    'values',
+                    'values.attribute',
+                    'prices.currency',
+                ])
+        );
+    }
+
     #[Computed]
     public function variant(): ?ProductVariant
     {
-        return $this->product->loadMissing([
-            'variants.values',
-            'variants.values.attribute',
-        ])
-            ->variants
-            ->first(
-                fn ($variant) => ! $variant->values->pluck('id')
-                    ->diff(collect($this->selectedOptionValues)->values())
-                    ->count()
-            );
-    }
+        if ($this->productOptions->isNotEmpty()) {
+            return $this->selectVariantUsingOption();
+        }
 
-    public function updatedSelectedOptionValues(): void
-    {
-        $this->dispatch('variant.selected', values: $this->selectedOptionValues);
+        if ($this->selectedVariantId) {
+            $this->dispatch('variant.selected', variantId: $this->selectedVariantId);
+
+            return $this->variants->firstWhere('id', $this->selectedVariantId);
+        }
+
+        return null;
     }
 
     #[Computed]
     public function productOptionValues(): Collection
     {
-        return $this->product->loadMissing([
-            'variants.values',
-            'variants.values.attribute',
-        ])
-            ->variants
-            ->pluck('values')
-            ->flatten();
+        return $this->variants->pluck('values')->flatten();
     }
 
     #[Computed]
@@ -108,6 +115,39 @@ class VariantsSelector extends Component
                     values: $values,
                 );
             })->values();
+    }
+
+    protected function selectVariantUsingOption(): ?ProductVariant
+    {
+        if (! count($this->selectedOptionValues)) {
+            return null;
+        }
+
+        $variant = $this->variants
+            ->first(
+                fn ($variant) => ! $variant->values->pluck('id')
+                    ->diff(collect($this->selectedOptionValues)->values())
+                    ->count()
+            );
+
+        if ($variant) {
+            $this->dispatch('variant.selected', variantId: $variant->id);
+        }
+
+        return $variant;
+    }
+
+    protected function getVariantAttributes(): array
+    {
+        if ($this->productOptions->isNotEmpty()) {
+            return $this->variant->values->mapWithKeys(fn ($value): array => [
+                $value->attribute->name => $value->value,
+            ])->toArray();
+        }
+
+        return [
+            'Variant' => $this->variant?->name,
+        ];
     }
 
     public function render(): View

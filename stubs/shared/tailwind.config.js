@@ -34,11 +34,11 @@ export default {
         },
       },
       colors: {
-        primary: colors.blue,
+        primary: colors.teal,
       },
       fontFamily: {
-        sans: ['Questrial', ...defaultTheme.fontFamily.sans],
-        heading: ['Figtree', ...defaultTheme.fontFamily.sans],
+        sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+        heading: ['Space Grotesk', ...defaultTheme.fontFamily.sans],
       },
       maxWidth: {
         '8xl': '98rem',

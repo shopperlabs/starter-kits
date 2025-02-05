@@ -24,10 +24,12 @@ class Home extends Component
                 },
                 'prices.currency',
             ])
+                ->withCount('variants')
                 ->publish()
                 ->get(),
             'collections' => Collection::with(['media'])
                 ->select('id', 'slug', 'name')
+                ->scopes('manual')
                 ->take(3)
                 ->get(),
         ]);

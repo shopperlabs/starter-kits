@@ -1,1 +1,10 @@
-<a {{ $attributes }} wire:navigate>{{ $slot }}</a>
+@props([
+    'spa' => true,
+])
+
+<a
+    {{ $attributes }}
+    @if($spa)
+        wire:navigate
+    @endif
+>{{ $slot }}</a>

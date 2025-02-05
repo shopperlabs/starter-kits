@@ -21,7 +21,11 @@ After install and setup Shopper, you need to run the following  command to insta
 composer require shopper/starter-kits --dev
 ```
 
-After installing the package, you may execute the shopper:starter-kit:install Artisan command. This command accepts the name of the stack you prefer (livewire, blade or inertia)
+After installing the package, you may execute the `shopper:starter-kit:install` Artisan command. This command accepts the name of the stack you prefer (livewire, blade or inertia)
+
+## Documentation
+
+Documentation for Starter kits can be found on the [Documentation](https://laravelshopper.dev/docs/livewire-starter-kit).
 
 ## License
 

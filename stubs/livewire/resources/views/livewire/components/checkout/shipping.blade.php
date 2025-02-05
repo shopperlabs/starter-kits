@@ -14,15 +14,15 @@
     @if($addresses->isNotEmpty())
         <form wire:submit="save" class="flex-1 space-y-3">
             @error('shippingAddressId')
-            <div class="p-4 border-l-4 border-danger-400 bg-danger-50">
+            <div class="p-4 border-l-4 border-red-400 bg-red-50">
                 <div class="flex">
                     <div class="flex-shrink-0">
-                        <svg class="w-5 h-5 text-danger-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <svg class="w-5 h-5 text-red-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
                         </svg>
                     </div>
                     <div class="ml-3">
-                        <p class="text-sm text-danger-700">
+                        <p class="text-sm text-red-700">
                             {{ __($message) }}
                         </p>
                     </div>
@@ -55,7 +55,7 @@
                                             id="shipping-address-{{ $shippingAddress->id }}"
                                             name="shipping"
                                             value="{{ $shippingAddress->id }}"
-                                            class="mt-0.5 h-4 w-4 shrink-0 cursor-pointer border-gray-300 text-primary focus:ring-primary-600 active:ring-2 active:ring-offset-2"
+                                            class="mt-0.5 size-4 shrink-0 cursor-pointer border-gray-300 text-primary-500 focus:ring-primary-600 active:ring-2 active:ring-offset-2"
                                         >
                                         <span class="flex flex-col space-y-0.5 text-sm text-gray-500">
                                         <span class="font-medium text-gray-900">{{ $shippingAddress->full_name }}</span>
@@ -83,21 +83,21 @@
 
                         <div>
                             <label for="same_as_shipping" class="inline-flex items-center">
-                                <input wire:model.live="sameAsShipping" id="same_as_shipping" type="checkbox" class="border-gray-300 text-brand focus:ring-brand" name="same_as_shipping">
+                                <input wire:model.live="sameAsShipping" id="same_as_shipping" type="checkbox" class="border-gray-300 text-primary-500 focus:ring-primary-500" name="same_as_shipping">
                                 <span class="text-sm text-gray-600 ms-2">{{ __("Same to delivery address") }}</span>
                             </label>
                         </div>
 
                         @error('billingAddressId')
-                        <div class="p-4 border-l-4 border-danger-400 bg-danger-50">
+                        <div class="p-4 border-l-4 border-red-400 bg-red-50">
                             <div class="flex">
                                 <div class="flex-shrink-0">
-                                    <svg class="w-5 h-5 text-danger-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <svg class="w-5 h-5 text-red-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                         <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
                                     </svg>
                                 </div>
                                 <div class="ml-3">
-                                    <p class="text-sm text-danger-700">
+                                    <p class="text-sm text-red-700">
                                         {{ __($message) }}
                                     </p>
                                 </div>
@@ -119,7 +119,7 @@
                                                 id="billing-address-{{ $billingAddress->id }}"
                                                 name="billing"
                                                 value="{{ $billingAddress->id }}"
-                                                class="mt-0.5 h-4 w-4 shrink-0 cursor-pointer border-gray-300 text-primary focus:ring-primary-600 active:ring-2 active:ring-offset-2"
+                                                class="mt-0.5 size-4 shrink-0 cursor-pointer border-gray-300 text-primary-500 focus:ring-primary-600 active:ring-2 active:ring-offset-2"
                                             >
                                             <span class="flex flex-col space-y-0.5 text-sm text-gray-500">
                                                 <span class="font-medium text-gray-900">{{ $billingAddress->full_name }}</span>

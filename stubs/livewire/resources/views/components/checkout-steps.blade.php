@@ -12,7 +12,7 @@
             <span
                 @class([
                     "relative flex size-6 items-center justify-center rounded-full text-xs leading-5",
-                    "bg-success-500" => $step->complete,
+                    "bg-gray-500" => $step->complete,
                     "border border-gray-300 bg-white text-gray-500" => ! $step->complete,
                 ])
             >

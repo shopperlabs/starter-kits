@@ -22,4 +22,10 @@
         </div>
         <x-product.price :product="$product" />
     </div>
+
+    @if($product->variants_count > 0)
+        <p class="mt-3 text-sm text-gray-500">
+            {{ __('+:count variants', ['count' => $product->variants_count]) }}
+        </p>
+    @endif
 </div>

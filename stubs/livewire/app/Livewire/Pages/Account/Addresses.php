@@ -30,7 +30,7 @@ class Addresses extends Component
     public function render(): View
     {
         return view('livewire.pages.account.addresses', [
-            'addresses' => auth()->user()->addresses,
+            'addresses' => auth()->user()->addresses->load('country'),
         ])
             ->title(__('My addresses'));
     }

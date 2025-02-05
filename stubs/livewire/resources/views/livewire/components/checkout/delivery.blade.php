@@ -36,7 +36,7 @@
                                 aria-description="{{ $option->description }}"
                                 @class([
                                     'group relative flex items-start justify-between cursor-pointer border p-4 focus:outline-none',
-                                    'data-[checked]:z-10 data-[checked]:border-success-200 data-[checked]:bg-success-50 z-10 border-primary-200 bg-primary-50' => $currentSelected === $option->id,
+                                    'data-[checked]:z-10 data-[checked]:border-green-200 data-[checked]:bg-green-50 z-10 border-primary-200 bg-primary-50' => $currentSelected === $option->id,
                                     'border-gray-200' => $currentSelected !== $option->id,
                                 ])
                             >
@@ -46,7 +46,7 @@
                                         wire:model.live.debounce="currentSelected"
                                         name="shipping"
                                         value="{{ $option->id }}"
-                                        class="mt-0.5 size-4 shrink-0 cursor-pointer border-gray-300 text-primary focus:ring-primary-600 active:ring-2 active:ring-offset-2"
+                                        class="mt-0.5 size-4 shrink-0 cursor-pointer border-gray-300 text-primary-500 focus:ring-primary-600 active:ring-2 active:ring-offset-2"
                                     >
                                     <span class="flex flex-col ml-3">
                                         <span

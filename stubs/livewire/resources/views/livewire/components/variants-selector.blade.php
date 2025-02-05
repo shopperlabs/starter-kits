@@ -1,7 +1,22 @@
 <div>
-    <form class="space-y-10" wire:submit="addToCart">
+    <div class="space-y-4">
+        <h1 class="font-heading text-xl font-semibold text-gray-900 lg:text-2xl">
+            {{ $product->name }}
+
+            @if ($this->variant)
+                {{ $this->variant->name }}
+            @endif
+        </h1>
+
+        <x-product.price
+            :product="$this->variant ?? $product"
+            class="text-lg font-bold text-brand lg:text-2xl"
+        />
+    </div>
+
+    <form class="mt-6 space-y-10" wire:submit="addToCart">
         @if($product->isVariant() && $this->productOptions->isNotEmpty())
-            <div class="space-y-8">
+            <div class="space-y-5">
                 @foreach ($this->productOptions as $option)
                     @if(\Illuminate\Support\Facades\View::exists('components.attributes.'.$option->attribute->slug))
                         <x-dynamic-component
@@ -11,6 +26,29 @@
                     @else
                         <x-attributes :option="$option" />
                     @endif
+                @endforeach
+            </div>
+        @endif
+
+        @if($product->isVariant() && $this->productOptions->isEmpty())
+            <div class="grid grid-cols-3 gap-3">
+                @foreach($this->variants as $variant)
+                    <button
+                        type="button"
+                        wire:key="{{ $variant->id }}"
+                        x-on:click="$wire.set('selectedVariantId', {{ $variant->id }})"
+                        @class([
+                            'inline-flex flex-col items-center gap-1 overflow-hidden text-sm/5 text-gray-500 px-2 py-1.5 ring-1 ring-gray-100 hover:ring-gray-200',
+                            'ring-2 ring-primary-600' => $variant->id === $selectedVariantId
+                        ])
+                    >
+                        <img
+                            src="{{ $variant->getFirstMediaUrl(config('shopper.media.storage.thumbnail_collection')) }}"
+                            alt=""
+                            class="object-center object-cover max-w-none h-14 w-full"
+                        >
+                        <span>{{ $variant->name }}</span>
+                    </button>
                 @endforeach
             </div>
         @endif

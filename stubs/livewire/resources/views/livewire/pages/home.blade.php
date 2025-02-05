@@ -18,24 +18,29 @@
         <rect width="100%" height="100%" stroke-width="0" fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)" />
     </svg>
 
-    <x-container class="relative py-16 sm:pt-24 lg:py-40">
+    <x-container class="relative py-16 sm:pt-24 lg:py-40 lg:flex lg:items-center lg:gap-x-10">
         <div class="sm:max-w-xl">
-            <h1 class="font font-heading text-4xl font-extrabold tracking-tight text-black sm:text-6xl">
-                {{ __('New arrivals are here') }}
-            </h1>
-            <p class="mt-4 text-xl text-gray-500">
-                {{ __('The new arrivals have, well, newly arrived. Check out the latest options from our summer small-batch release while they\'re still in stock.') }}
-            </p>
+            <div>
+                <h1 class="font font-heading text-4xl font-extrabold tracking-tight text-black sm:text-6xl">
+                    {{ __('New arrivals are here') }}
+                </h1>
+                <p class="mt-4 text-xl text-gray-500">
+                    {{ __('The new arrivals have, well, newly arrived. Check out the latest options from our summer small-batch release while they\'re still in stock.') }}
+                </p>
+            </div>
+            <div class="py-10">
+                <x-buttons.primary href="#" class="group px-8 py-3 text-center text-base font-medium">
+                    {{ __('Shop now') }}
+                    <span
+                        class="ml-2 translate-x-0 transform transition duration-200 ease-in-out group-hover:translate-x-1"
+                    >
+                        <x-untitledui-arrow-narrow-right class="size-6" stroke-width="1.5" aria-hidden="true" />
+                    </span>
+                </x-buttons.primary>
+            </div>
         </div>
-        <div class="py-10">
-            <x-buttons.primary href="#" class="group px-8 py-3 text-center text-base font-medium">
-                {{ __('Shop now') }}
-                <span
-                    class="ml-2 translate-x-0 transform transition duration-200 ease-in-out group-hover:translate-x-1"
-                >
-                    <x-untitledui-arrow-narrow-right class="size-6" stroke-width="1.5" aria-hidden="true" />
-                </span>
-            </x-buttons.primary>
+        <div class="mt-16 sm:mt-24 lg:mt-0 lg:shrink-0 lg:grow">
+            <img class="h-auto object-cover lg:max-w-3xl mx-auto" src="https://res.cloudinary.com/mckenziearts/image/upload/v1738704321/b3h4qwymvjxpfb8naf0v.png" alt="" />
         </div>
     </x-container>
 
@@ -48,8 +53,8 @@
                     <h2 id="collection-heading" class="font-heading text-2xl font-extrabold tracking-tight text-gray-950 sm:text-3xl">
                         {{ __('Shop by Collection') }}
                     </h2>
-                    <p class="mt-2 text-base text-gray-500">
-                        Each season, we collaborate with world-class designers to create a collection inspired by the natural world.
+                    <p class="mt-2 text-base/6 max-w-3xl text-gray-500">
+                        {{ __('Explore our curated furniture collections, designed to elevate every space. From modern minimalism to classic elegance, find timeless pieces that blend style, comfort, and functionality for your home.') }}
                     </p>
 
                     <div class="mt-10 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:space-y-0">
@@ -58,7 +63,7 @@
                                 <img
                                     src="{{ $collection->getFirstMediaUrl(config('shopper.media.storage.thumbnail_collection')) }}"
                                     alt="{{ $collection->name }}"
-                                    class="aspect-[3/2] w-full object-cover group-hover:opacity-75 lg:aspect-[5/6]"
+                                    class="aspect-[3/2] w-full object-cover group-hover:opacity-75 lg:aspect-[3/2]"
                                 />
                                 <h3 class="mt-2 text-base font-semibold text-gray-900">
                                     {{ $collection->name }}

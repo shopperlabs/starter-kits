@@ -5,7 +5,7 @@
             <div class="lg:max-w-sm">
                 <h3 class="text-sm font-medium text-gray-900">
                     <x-brand
-                        class="size-12 lg:size-14"
+                        class="w-auto h-12 lg:h-14 text-gray-500"
                         aria-hidden="true"
                     />
                 </h3>
@@ -21,19 +21,23 @@
                         </h3>
                         <ul role="list" class="mt-10 space-y-5">
                             <li>
-                                <x-footer-link href="#">{{ __('The Founder') }}</x-footer-link>
+                                <x-footer-link :spa="false" href="https://laravelshopper.dev">
+                                    {{ __('Documentation') }}
+                                </x-footer-link>
                             </li>
                             <li>
-                                <x-footer-link href="#">{{ __('Journal') }}</x-footer-link>
+                                <x-footer-link :spa="false" href="https://github.com/shopperlabs/shopper">
+                                    {{ __('Github') }}
+                                </x-footer-link>
                             </li>
                             <li>
-                                <x-footer-link href="#">{{ __('Our work') }}</x-footer-link>
+                                <x-footer-link href="#">{{ __('About') }}</x-footer-link>
                             </li>
                             <li>
                                 <x-footer-link href="#">{{ __('Secure payment') }}</x-footer-link>
                             </li>
                             <li>
-                                <x-footer-link href="#">{{ __('Contact') }}</x-footer-link>
+                                <x-footer-link href="/">{{ __('Contact') }}</x-footer-link>
                             </li>
                         </ul>
                     </div>

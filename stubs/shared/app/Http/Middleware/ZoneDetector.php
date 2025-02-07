@@ -32,7 +32,7 @@ class ZoneDetector
 
     private function setDefaultZone(Collection $countries): void
     {
-        $defaultZone = $countries->firstWhere('zoneCode', env('SHOPPER_DEFAULT_ZONE', 'AF'));
+        $defaultZone = $countries->firstWhere('zoneCode', config('starterkit.default_zone'));
 
         if (! ZoneSessionManager::checkSession() && $defaultZone) {
             ZoneSessionManager::setSession($defaultZone);

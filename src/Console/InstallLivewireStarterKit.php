@@ -100,6 +100,7 @@ trait InstallLivewireStarterKit
 
         // Config...
         copy(__DIR__.'/../../stubs/shared/config/shopper/models.php', config_path('shopper/models.php'));
+        copy(__DIR__.'/../../stubs/shared/config/starterkit.php', config_path('starterkit.php'));
 
         // Routes...
         copy(__DIR__.'/../../stubs/livewire/routes/web.php', base_path('routes/web.php'));

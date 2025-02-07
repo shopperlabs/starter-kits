@@ -25,7 +25,7 @@ After installing the package, you may execute the `shopper:starter-kit:install` 
 
 ## Documentation
 
-Documentation for Starter kits can be found on the [Documentation](https://laravelshopper.dev/docs/livewire-starter-kit).
+Documentation for Starter kits can be found on the [Documentation](https://laravelshopper.dev/docs/starter-kits).
 
 ## License
 

@@ -23,6 +23,8 @@
 <body class="antialiased selection:bg-primary-600 selection:text-white">
     {{ $slot }}
 
+    <x-shopper::adminbar />
+
     @livewire('notifications')
     @livewire('slide-over-panel')
     @livewire('wire-elements-modal')

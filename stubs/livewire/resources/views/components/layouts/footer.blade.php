@@ -164,6 +164,9 @@
         <div class="flex flex-col items-center border-t border-gray-200 py-8 sm:flex-row sm:justify-between lg:py-10">
             <p class="text-sm text-gray-700">
                 © {{ date('Y') }} {{ config('app.name') }}, Inc. All rights reserved.
+                <a href="https://laravelshopper.dev" target="_blank" class="pl-1 underline hover:text-gray-900">
+                    {{ __('Powered by Shopper') }}
+                </a>
             </p>
             <div class="mt-5 divide-x divide-gray-200 sm:mt-0">
                 <x-link href="#" class="inline-flex px-3 text-sm leading-5 text-gray-700 hover:underline">

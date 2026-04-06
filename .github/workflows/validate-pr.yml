@@ -1,0 +1,84 @@
+name: Validate Registry PR
+
+on:
+  pull_request:
+    paths:
+      - 'registry.json'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install validation tools
+        run: pip install check-jsonschema
+
+      - name: Validate JSON schema
+        run: check-jsonschema --schemafile registry.schema.json registry.json
+
+      - name: Check for duplicate slugs and packages
+        run: |
+          SLUGS=$(jq -r '.kits[].slug' registry.json | sort | uniq -d)
+          if [ -n "$SLUGS" ]; then
+            echo "::error::Duplicate slugs found: $SLUGS"
+            exit 1
+          fi
+
+          PACKAGES=$(jq -r '.kits[].package' registry.json | sort | uniq -d)
+          if [ -n "$PACKAGES" ]; then
+            echo "::error::Duplicate packages found: $PACKAGES"
+            exit 1
+          fi
+
+          echo "No duplicates found."
+
+      - name: Validate new kit entries
+        run: |
+          git fetch origin ${{ github.base_ref }} --depth=1
+
+          if ! git show origin/${{ github.base_ref }}:registry.json > /dev/null 2>&1; then
+            echo "No registry.json on base branch — treating all entries as new."
+            NEW_PACKAGES=$(jq -r '.kits[].package' registry.json | sort)
+          else
+            NEW_PACKAGES=$(diff \
+              <(git show origin/${{ github.base_ref }}:registry.json | jq -r '.kits[].package' | sort) \
+              <(jq -r '.kits[].package' registry.json | sort) \
+              | grep '^>' | sed 's/^> //' || true)
+          fi
+
+          if [ -z "$NEW_PACKAGES" ]; then
+            echo "No new packages to validate."
+            exit 0
+          fi
+
+          FAILED=0
+          for PACKAGE in $NEW_PACKAGES; do
+            echo "Validating package: $PACKAGE"
+
+            # Check GitHub repo exists and contains shopper-kit.yaml
+            REPO=$(jq -r --arg pkg "$PACKAGE" '.kits[] | select(.package == $pkg) | .repo' registry.json)
+
+            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              "https://api.github.com/repos/${REPO}")
+            if [ "$HTTP_CODE" != "200" ]; then
+              echo "::error::Repository $REPO not found on GitHub (HTTP $HTTP_CODE)"
+              FAILED=1
+              continue
+            fi
+            echo "  Repository: OK"
+
+            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              "https://api.github.com/repos/${REPO}/contents/shopper-kit.yaml")
+            if [ "$HTTP_CODE" != "200" ]; then
+              echo "::error::Repository $REPO does not contain a shopper-kit.yaml (HTTP $HTTP_CODE)"
+              FAILED=1
+            else
+              echo "  shopper-kit.yaml: OK"
+            fi
+          done
+
+          exit $FAILED

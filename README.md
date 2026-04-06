@@ -1,32 +1,37 @@
-<p align="center"><img src="/art/socialcard.png" alt="Logo Shopper Starter kit"></p>
+# Shopper Starter Kits
 
-<p align="center">
-    <a href="https://packagist.org/packages/shopper/starter-kits"><img src="https://img.shields.io/packagist/dt/shopper/starter-kits" alt="Total Downloads"></a>
-    <a href="https://packagist.org/packages/shopper/starter-kits"><img src="https://img.shields.io/packagist/v/shopper/starter-kits" alt="Latest Stable Version"></a>
-    <a href="https://packagist.org/packages/shopper/starter-kits"><img src="https://img.shields.io/packagist/l/shopper/starter-kits" alt="License"></a>
-</p>
+A community-driven registry of starter kits for [Laravel Shopper](https://github.com/shopperlabs/shopper).
 
-## Starter Kits
-
-This repository is a base forked of Laravel Breeze, and is give as an example way to build a front-end with Shopper Headless e-commerce.
-
-> [!IMPORTANT]  
-> As this starter kit is already based on Laravel Breeze, you no longer need to install it to have authentication, as it offers the same features as Laravel breeze.
+Starter kits are scaffold templates installed once — the code belongs to you after installation.
 
 ## Installation
 
-After install and setup Shopper, you need to run the following  command to install the starter kit
+Install a kit using the Shopper CLI:
 
 ```bash
-composer require shopper/starter-kits --dev
+php artisan shopper:kit:install <package>
 ```
 
-After installing the package, you may execute the `shopper:starter-kit:install` Artisan command. This command accepts the name of the stack you prefer (livewire, blade or inertia)
+## Available Starter Kits
 
-## Documentation
+### Official
 
-Documentation for Starter kits can be found on the [Documentation](https://laravelshopper.dev/docs/starter-kits).
+| Name                                                                       | Package                            | Description                                                                     | Tags                 |
+|----------------------------------------------------------------------------|------------------------------------|---------------------------------------------------------------------------------|----------------------|
+| [Livewire Storefront](https://github.com/shopperlabs/livewire-starter-kit) | `shopperlabs/livewire-starter-kit` | A full Livewire + Alpine storefront with checkout, accounts, and product pages. | livewire, storefront |
+
+## Submit Your Kit
+
+Want to add your starter kit to this registry? See the [contributing guide](CONTRIBUTING.md).
+
+## What is a Starter Kit?
+
+A starter kit is a **scaffold**, not a theme. It is installed once into your Laravel project and gives you a starting point for building your storefront. After installation, you own the code — modify, delete, or reorganize anything.
+
+Each starter kit is a Composer package or GitHub repository containing a `shopper-kit.yaml` manifest that declares which files to copy, which dependencies to install, and which commands to run after installation.
+
+Learn more in the [Shopper documentation](https://docs.laravelshopper.dev).
 
 ## License
 
-Starter Kits is open-sourced software licensed under the [MIT license](LICENSE.md).
+This registry is open-sourced software licensed under the [MIT license](LICENSE.md).

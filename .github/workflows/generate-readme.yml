@@ -1,0 +1,88 @@
+name: Generate README
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'registry.json'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Generate README
+        run: |
+          cat > README.md <<'HEADER'
+          # Shopper Starter Kits
+
+          A community-driven registry of starter kits for [Laravel Shopper](https://github.com/shopperlabs/shopper).
+
+          Starter kits are scaffold templates installed once — the code belongs to you after installation.
+
+          ## Installation
+
+          Install a kit using the Shopper CLI:
+
+          ```bash
+          php artisan shopper:kit:install <package>
+          ```
+
+          ## Available Starter Kits
+
+          HEADER
+
+          # Remove leading indentation from heredoc
+          sed -i 's/^          //' README.md
+
+          # Official kits
+          OFFICIAL=$(jq -r '.kits[] | select(.official == true)' registry.json)
+          if [ -n "$OFFICIAL" ]; then
+            echo "### Official" >> README.md
+            echo "" >> README.md
+            echo "| Name | Package | Description | Tags |" >> README.md
+            echo "|------|---------|-------------|------|" >> README.md
+            jq -r '.kits[] | select(.official == true) | "| [\(.name)](https://github.com/\(.repo)) | `\(.package)` | \(.description) | \(.tags | join(", ")) |"' registry.json >> README.md
+            echo "" >> README.md
+          fi
+
+          # Community kits
+          COMMUNITY=$(jq -r '.kits[] | select(.official == false)' registry.json)
+          if [ -n "$COMMUNITY" ]; then
+            echo "### Community" >> README.md
+            echo "" >> README.md
+            echo "| Name | Package | Description | Tags |" >> README.md
+            echo "|------|---------|-------------|------|" >> README.md
+            jq -r '.kits[] | select(.official == false) | "| [\(.name)](https://github.com/\(.repo)) | `\(.package)` | \(.description) | \(.tags | join(", ")) |"' registry.json >> README.md
+            echo "" >> README.md
+          fi
+
+          cat >> README.md <<'FOOTER'
+          ## Submit Your Kit
+
+          Want to add your starter kit to this registry? See the [contributing guide](CONTRIBUTING.md).
+
+          ## What is a Starter Kit?
+
+          A starter kit is a **scaffold**, not a theme. It is installed once into your Laravel project and gives you a starting point for building your storefront. After installation, you own the code — modify, delete, or reorganize anything.
+
+          Each starter kit is a Composer package or GitHub repository containing a `shopper-kit.yaml` manifest that declares which files to copy, which dependencies to install, and which commands to run after installation.
+
+          Learn more in the [Shopper documentation](https://docs.laravelshopper.dev).
+          FOOTER
+
+          # Remove leading indentation from footer
+          sed -i 's/^          //' README.md
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --staged --quiet || git commit -m "docs: auto-generate README from registry"
+          git push

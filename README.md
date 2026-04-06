@@ -16,8 +16,8 @@ php artisan shopper:kit:install <package>
 
 ### Official
 
-| Name                                                                       | Package                            | Description                                                                     | Tags                 |
-|----------------------------------------------------------------------------|------------------------------------|---------------------------------------------------------------------------------|----------------------|
+| Name | Package | Description | Tags |
+|------|---------|-------------|------|
 | [Livewire Storefront](https://github.com/shopperlabs/livewire-starter-kit) | `shopperlabs/livewire-starter-kit` | A full Livewire + Alpine storefront with checkout, accounts, and product pages. | livewire, storefront |
 
 ## Submit Your Kit
@@ -31,7 +31,3 @@ A starter kit is a **scaffold**, not a theme. It is installed once into your Lar
 Each starter kit is a Composer package or GitHub repository containing a `shopper-kit.yaml` manifest that declares which files to copy, which dependencies to install, and which commands to run after installation.
 
 Learn more in the [Shopper documentation](https://docs.laravelshopper.dev).
-
-## License
-
-This registry is open-sourced software licensed under the [MIT license](LICENSE.md).

@@ -1,8 +1,8 @@
 # Shopper Starter Kits
 
-A community-driven registry of starter kits for [Shopper](https://github.com/shopperlabs/shopper).
+A community-driven registry of starter kits for [Laravel Shopper](https://github.com/shopperlabs/shopper).
 
-Starter kits are scaffold templates installed once the code belongs to you after installation.
+Starter kits are scaffold templates installed once — the code belongs to you after installation.
 
 ## Installation
 
@@ -18,7 +18,7 @@ php artisan shopper:kit:install <package>
 
 | Name | Package | Description | Tags |
 |------|---------|-------------|------|
-| [Livewire Storefront](https://github.com/shopperlabs/livewire-starter-kit) | `shopperlabs/livewire-starter-kit` | A full Livewire + Alpine storefront with checkout, accounts, and product pages. | livewire, storefront |
+| [Livewire Storefront starter kit](https://github.com/shopperlabs/livewire-starter-kit) | `shopperlabs/livewire-starter-kit` | A full Livewire + Alpine storefront with checkout, accounts, and product pages. | livewire, storefront |
 
 ## Submit Your Kit
 

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "kits": [
+    {
+      "name": "Livewire Storefront",
+      "slug": "livewire-storefront",
+      "package": "shopperlabs/livewire-starter-kit",
+      "repo": "shopperlabs/livewire-starter-kit",
+      "description": "A full Livewire + Alpine storefront with checkout, accounts, and product pages.",
+      "author": "shopperlabs",
+      "shopper": "^2.7",
+      "tags": ["livewire", "storefront"],
+      "official": true,
+      "preview": null
+    }
+  ]
+}

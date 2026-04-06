@@ -1,8 +1,8 @@
 # Shopper Starter Kits
 
-A community-driven registry of starter kits for [Laravel Shopper](https://github.com/shopperlabs/shopper).
+A community-driven registry of starter kits for [Shopper](https://github.com/shopperlabs/shopper).
 
-Starter kits are scaffold templates installed once — the code belongs to you after installation.
+Starter kits are scaffold templates installed once the code belongs to you after installation.
 
 ## Installation
 

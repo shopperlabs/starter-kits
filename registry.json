@@ -2,7 +2,7 @@
   "version": 1,
   "kits": [
     {
-      "name": "Livewire Storefront",
+      "name": "Livewire Storefront starter kit",
       "slug": "livewire-storefront",
       "package": "shopperlabs/livewire-starter-kit",
       "repo": "shopperlabs/livewire-starter-kit",

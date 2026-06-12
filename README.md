@@ -19,6 +19,8 @@ php artisan shopper:kit:install <package>
 | Name | Package | Description | Tags |
 |------|---------|-------------|------|
 | [Livewire Storefront starter kit](https://github.com/shopperlabs/livewire-starter-kit) | `shopperlabs/livewire-starter-kit` | A full Livewire + Alpine storefront with checkout, accounts, and product pages. | livewire, storefront |
+| [Vue Storefront starter kit](https://github.com/shopperlabs/vue-starter-kit) | `shopperlabs/vue-starter-kit` | An Inertia + Vue 3 storefront with Tailwind v4, Wayfinder routes, multi-currency zones, cart, checkout, and Stripe payment. | vue, inertia, storefront |
+| [React Storefront starter kit](https://github.com/shopperlabs/react-starter-kit) | `shopperlabs/react-starter-kit` | An Inertia + React 19 storefront with Tailwind v4, Wayfinder routes, multi-currency zones, cart, checkout, and Stripe payment. | react, inertia, storefront |
 
 ## Submit Your Kit
 

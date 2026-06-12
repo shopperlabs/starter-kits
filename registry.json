@@ -8,8 +8,32 @@
       "repo": "shopperlabs/livewire-starter-kit",
       "description": "A full Livewire + Alpine storefront with checkout, accounts, and product pages.",
       "author": "shopperlabs",
-      "shopper": "^2.7",
+      "shopper": "^2.9",
       "tags": ["livewire", "storefront"],
+      "official": true,
+      "preview": null
+    },
+    {
+      "name": "Vue Storefront starter kit",
+      "slug": "vue-storefront",
+      "package": "shopperlabs/vue-starter-kit",
+      "repo": "shopperlabs/vue-starter-kit",
+      "description": "An Inertia + Vue 3 storefront with Tailwind v4, Wayfinder routes, multi-currency zones, cart, checkout, and Stripe payment.",
+      "author": "shopperlabs",
+      "shopper": "^2.9",
+      "tags": ["vue", "inertia", "storefront"],
+      "official": true,
+      "preview": null
+    },
+    {
+      "name": "React Storefront starter kit",
+      "slug": "react-storefront",
+      "package": "shopperlabs/react-starter-kit",
+      "repo": "shopperlabs/react-starter-kit",
+      "description": "An Inertia + React 19 storefront with Tailwind v4, Wayfinder routes, multi-currency zones, cart, checkout, and Stripe payment.",
+      "author": "shopperlabs",
+      "shopper": "^2.9",
+      "tags": ["react", "inertia", "storefront"],
       "official": true,
       "preview": null
     }
